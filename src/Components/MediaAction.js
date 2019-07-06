@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom"
 // Get Dropbox method
 const Dropbox = require('dropbox').Dropbox;
 
-export function FileActionBtn(props) {
+export function MediaActionBtn(props) {
   const [ currentPath, setCurrentPath] = useState('');
   const [ reviewList, setReviewList] = useState([]);
   const [ logOut, goLogOut ] = useState(false);
@@ -53,12 +53,7 @@ export function FileActionBtn(props) {
     return (
       <>
         {(logOut === true) ? <Redirect to="/"/> :
-        <section id="actionBtnContainer">  
-    
-
-    
           <button className="button logOutBtn"onClick={ setLogOut }> Logga Ut</button>
-        </section>
         }
       </>
     );

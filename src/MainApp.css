@@ -31,42 +31,27 @@ body{
   transform: translateY(4px);
 }
 /* ==================== Body and main parts ==================== */
-/*huvudsida main*/
 #appBody{
   margin-top: -8px;
   margin-left: -8px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   width: 100%;
-  height: 99.5vh;
-
+  height: 88vh;
+  background-color: #eaeff1;
 }
-/*  sida*/
-#appBody__dashboard{
-  background-color: #18202c;
+#appBody__patch{
   width: 20%;
 }
-#appBody__dashboard div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#appBody__mainContent{
-  background-color: #eaeff1;
-  width: 100%;
 
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-}
-#mainContent{
-  flex-flow: wrap;
+#appBody__mainContent{
+  width: 80%;
   display: flex;
-  justify-content: space-evenly;
-  /* align-items: center; */
-  align-content: space-around;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
+
 
 /* Header ====================================================== */
 #header{
@@ -135,54 +120,38 @@ body{
 
 
 
-/* MainContents ==================== */
+/* ==================== MainContents ==================== */
 #mainContent{
   height: 80vh;
 }
+
+
+/* MediaAction ==================== */
 #actionBtnContainer{
   position: absolute;
-  top: 86px;
-  left: -2px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: center;
-  width: 133px;
-  height: 330px;
-}
-#itemToUpLoad{
-  width: 160px;
-  color: white;
-  background-color: black;
-  margin-bottom: 20px;
-}
-#createFoldersName{
-  margin-top: 20px;
-}
-#newFolder{
-  position: relative;
-  top: 0px;
-  left: 13px;
-  width: 57px;
-  font-size: 66px;
-}
-.logOutBtn{
-  position: relative;
-  top: 0px;
-  left: 13px;
-  width: 112px;
-  font-size: 20px;
-}
-.contentContainer{
-  width: 100%;
-  height: 100%;
+  bottom: 0;
+  background-color: #18202c;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-#contentContainer{
   width: 100%;
+  height: 10vh;
 }
+#appBody__dashboard div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logOutBtn{
+  position: absolute;
+  top: 13%;
+  right: 0px;
+  width: 13%;
+  font-size: 1.3em;
+}
+
+
 /* Table styling */
 #itemContainer {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -234,13 +203,7 @@ body{
 }
 
 /* ==================================================*/
-footer{
-  text-align: center;
-  background-color: #eaeff1;
-  width: 100%;
-  height: 10vh;
-  line-height: 76px;
-}
+
 .fontColor{
   color: black;
 }

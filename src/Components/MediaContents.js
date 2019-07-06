@@ -4,7 +4,7 @@ import { RenderList } from './RenderList';
 import { BrowseRouter as Router, Route, Link, Redirect} from "react-router-dom";
 const Dropbox = require('dropbox').Dropbox;
 
-export function DbxContents(props) {
+export function MediaContents(props) {
   const [ accessToken, setAccessToken] = useState('');
   const [ currentPath, setCurrentPath] = useState('');
   const [showFileList, setShowFileList ] = useState([]);

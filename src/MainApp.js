@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom"
 import { logedIn$ } from './store';
 import { Header } from './Components/Header';
 import { Login } from './Components/Login';
-import { Home } from './Components/Home';
+import { MediaHome } from './Components/MediaHome';
 
 class MainApp extends PureComponent {
   constructor(props) {
@@ -40,24 +40,12 @@ class MainApp extends PureComponent {
             rel="stylesheet">
           </link>
         </Helmet>
-        <div id="appBody">
-          <section id="appBody__dashboard">
-          </section>
-          
-          <main id="appBody__mainContent">
-            <Header/>
-            <main id="mainContent">
-
-            <Router basename={process.env.PUBLIC_URL}> 
+        <Header/>
+            <Router> 
               <Route exact path="/" component={ Login } />
-              <Route path="/Home" component={ Home }/>
+              <Route path="/MediaHome" component={ MediaHome }/>
             </Router>
-          </main>
-          <footer>
-            Uppförd av Fredrik Hjärpe 
-          </footer>
-          </main>           
-        </div>
+      
       </>
     );
   }

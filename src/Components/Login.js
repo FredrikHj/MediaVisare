@@ -9,7 +9,7 @@ export function Login(props) {
   function login() {
     setRedirect(true);
   }
-  if (redirect === false) return <Redirect to="/Home"/>; // Redirect auto into Home for now until the login is fixed  
+  if (redirect === false) return <Redirect to="/MediaHome"/>; // Redirect auto into Home for now until the login is fixed  
       return (
         <> 
           <div id="loginContainer">
