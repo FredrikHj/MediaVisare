@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 
 
-export function NavFileStructure(props) {   
+export let FilePath = (props) => {   
     return (
         <section>
             <p>Var är jag:
-                {
+{/*                 {
                     props.location.pathname.split("/").map((subFolderPath, idx, fullPathArr) => {
                         const patchArr = fullPathArr.slice(1, idx + 1);
                         const currentPath = '/' + patchArr.join('/');
@@ -25,7 +25,7 @@ export function NavFileStructure(props) {
                         return insurtElement;
                     })
                 
-                }
+                } */}
             </p>
         </section>
     );

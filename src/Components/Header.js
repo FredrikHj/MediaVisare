@@ -10,9 +10,9 @@ export function Header(props) {
     <> 
         <header id="header">
             <section id="headerContainer">
+                <p className="headline">MediaVisare</p>         
                 <div></div>
-                <p id="headline">MediaVisare</p>         
-                <div></div>
+                <p className="headline mediaChanger">Bilder / Filmer</p>
             </section>
         </header>
         

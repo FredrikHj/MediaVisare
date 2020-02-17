@@ -59,17 +59,16 @@ body{
   background-color: #009be5;
 }
 #headerContainer{
-  margin-left: -20%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 123%;
+  width: 100%;
   
 }
 #leftSide{
   width: 10%;
 }
-#headline{
+.headline{
   display: inline-block;
   text-align: center;
   color: white;
