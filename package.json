@@ -5,10 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cors": "^2.8.5",
-    "dropbox": "^4.0.17",
     "eslint-plugin-react-hooks": "^1.6.0",
     "gh-pages": "^2.0.1",
-    "glamor": "^2.20.40",
     "jsonwebtoken": "^8.5.1",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
@@ -16,7 +14,8 @@
     "react-helmet": "^5.2.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^3.4.0",
-    "rxjs": "^6.5.1"
+    "rxjs": "^6.5.1",
+    "styled-components": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

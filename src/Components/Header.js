@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 
 // Access for Dropbox
-const Dropbox = require('dropbox').Dropbox;
 
 export function Header(props) {  
         
