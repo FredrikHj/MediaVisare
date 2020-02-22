@@ -14,23 +14,21 @@ export let HomeImages = () => {
     }).catch(error => {
       ////console.log(error.response);
     });
-  },[fileList] );
+  },[] );
   return (
     <StyleHomeImages.container>
-      
       <aside id="appBody__patch">
-      Bilder:
-        <section>
-          {(fileList.length !== 0)
-            ? fileList.map((item, index) => {
-                console.log(item);
-                return(
-                  <div key={ index }><img src={'Images/' + item} alt="erge"/></div>
-                );
-              })
-            : 'inget inläst'
-          }
-        </section>
+        
+        Bilder:
+        {(fileList.length !== 0)
+          ? fileList.map((item, index) => {
+              console.log(item);
+              return(
+                <div key={ index }><img src={`../../Images/${item}`} alt="erge"/></div>
+              );
+            })
+          : 'inget inläst'
+        }
       'Mapp och filer kommer här'
 
       </aside>

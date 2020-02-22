@@ -8,7 +8,6 @@ let cors = require('cors');
 const fileSystem = require('fs');
 
 const path = require('path');
-const directoryPath = path.join('Images', '');
 
 
 //Config for the backend
@@ -21,6 +20,7 @@ const port = process.env.PORT || backConfig.serverPort;
 //var mysql = require('mysql');
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 
+const directoryPath = path.join('Images', '');
 app.get('/ReqMedia', cors(), (req, res) => {
     let imagesList = [];
 /*     console.log('fdb');

@@ -1,1 +1,1 @@
-nodemon .\Backend\MediaServer.js
+nodemon Backend/MediaServer.js
