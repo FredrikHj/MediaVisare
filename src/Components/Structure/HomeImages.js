@@ -24,7 +24,7 @@ export let HomeImages = () => {
           ? fileList.map((item, index) => {
               console.log(item);
               return(
-                <div key={ index }><img src={`../../Images/${item}`} alt="erge"/></div>
+                <div key={ index }><img src={`../../../Images/${item}`} alt="erge"/></div>
               );
             })
           : 'inget inläst'
