@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { localStorage$, updateCurrentPath } from '../store';
+import { localStorage$, updateCurrentPath } from '../../store';
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import { CheckItemType } from './CheckItemType';
 

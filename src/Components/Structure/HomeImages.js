@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 //import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
+import { StyleHomeImages } from '../Style/StyleHomeImages';
 
 export let HomeImages = () => {
  
   return (
-    <section id="appBody">
-Bilder
+    <StyleHomeImages.container>
+      
       <aside id="appBody__patch">
-        Mapp och filer kommer här
+      Bilder -
+      Mapp och filer kommer här
 
       </aside>
       <main id="appBody__mainContent">
@@ -16,6 +18,6 @@ Bilder
       <footer id="actionBtnContainer">
 
       </footer>
-    </section>
+    </StyleHomeImages.container>
   );
 }

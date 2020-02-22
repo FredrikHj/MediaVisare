@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom"
 export let FilePath = (props) => {   
     return (
         <section>
-            <p>Var är jag:
+            <p>Var är jag: /
 {/*                 {
                     props.location.pathname.split("/").map((subFolderPath, idx, fullPathArr) => {
                         const patchArr = fullPathArr.slice(1, idx + 1);
