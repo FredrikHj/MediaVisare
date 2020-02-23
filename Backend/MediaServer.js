@@ -20,7 +20,7 @@ const port = process.env.PORT || backConfig.serverPort;
 //var mysql = require('mysql');
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 
-const directoryPath = path.join('Images', '');
+const directoryPath = path.join('./src/Images', '');
 app.get('/ReqMedia', cors(), (req, res) => {
     let imagesList = [];
 /*     console.log('fdb');

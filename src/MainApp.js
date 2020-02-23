@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Helmet} from "react-helmet";
+
 // React Router - ES6 modules
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import { StyleMainBody, StyleHeader } from './Components/Style/StyleMainApp.js';
@@ -16,10 +16,6 @@ let MainApp = () => {
   },[ startMedia ])
   return (
     <StyleMainBody>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>MediaVisare - ?</title>
-      </Helmet>
       <Router>
         <StyleHeader.container>
           <StyleHeader.headline>MediaVisare</StyleHeader.headline>         
