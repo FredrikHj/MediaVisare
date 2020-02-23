@@ -5,25 +5,24 @@ import { StyleHomeImages } from '../Style/StyleHomeImages';
 import { folderFileListArr$ } from '../Data/GlobalProps';
 
 export let HomeImages = () => {
+  const [ incommingDataList, setIncommingDataList ] = useState([]);
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
+    axiosGet('HomeImages', incommingDataList);
     folderFileListArr$.subscribe((folderFileListArr) => {
-    console.log("TCL: HomeImages -> folderFileListArr", folderFileListArr)
-      setFileList(folderFileListArr);
+      if (incommingDataList.length === 0) {
+        setIncommingDataList(folderFileListArr);
+      }
     });
-    if (fileList.length === 0) {
-      //setFileList(axiosGet('HomeImages', fileList));
-      
+  },[ incommingDataList ] );
+  let sortDataList = (item, index) => {
+    let pushtoFileList = [...fileList ];
+    if ( item.includes('.')) {
+      pushtoFileList.push(item);
+      setFileList(pushtoFileList);
     }
-    console.log(axiosGet('HomeImages', fileList));
-    
-  },[fileList] );
-  console.log("TCL: HomeImages -> fileList", fileList)
-  let checkIncomingDataList = (incommingData) => {
-    incommingData
-  }
-  
+  }  
   return (
     <StyleHomeImages.container>
       <Helmet>
@@ -32,11 +31,10 @@ export let HomeImages = () => {
       </Helmet>
       <aside >
       Bilder:
-        <StyleHomeImages.folderFilePath>
-           {(fileList.length !== 0)
-            ? fileList.map((item, index) => {
-                checkIncomingDataList(item);
-                console.log(item);
+       <StyleHomeImages.folderFilePath>
+          {(incommingDataList.legnth !== 0)
+            ? incommingDataList.map((item, index) => {
+              sortDataList(item, index);
                 return(
                   <StyleHomeImages.iconMeasurement key={ index }>
 
@@ -48,7 +46,7 @@ export let HomeImages = () => {
             : 'inget inläst'
           }
        </StyleHomeImages.folderFilePath>
-      'Mapp och filer kommer här'
+       'Mapp och filer kommer här'
 
       </aside>
       <main id="appBody__mainContent">
