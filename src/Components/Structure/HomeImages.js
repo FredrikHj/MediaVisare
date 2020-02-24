@@ -26,7 +26,7 @@ export let HomeImages = () => {
       axiosGet('HomeImages', fileList);
     }, 3000, fileList);
     
-  });
+  };
   console.log("TCL: HomeImages -> fileList", fileList)
   let checkIncomingDataList = (incommingData) => {
 
