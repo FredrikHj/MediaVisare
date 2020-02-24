@@ -1,11 +1,12 @@
 // Creates a Express server in Node JS and use diff... modules    
 const express = require('express');
+var https = require('https');
 const app = express();
 let cors = require('cors');
+const fileSystem = require('fs');
 
 // Module for handle the user logins
 //let jwt = require('jsonwebtoken');
-const fileSystem = require('fs');
 
 const path = require('path');
 
@@ -14,13 +15,16 @@ const path = require('path');
 const backConfig = require('./backConfig.json');
 
 // The server information
-const port = process.env.PORT || backConfig.serverPort;
+const port = backConfig.serverPort;
 
 // MYSQL module for connection
 //var mysql = require('mysql');
-app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
-
-const directoryPath = path.join('./src/Images', '');
+https.createServer({
+    key: fileSystem.readFileSync('server.key'),
+    cert: fileSystem.readFileSync('server.cert')
+}, app).listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
+//app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
+const directoryPath = path.join('./Images', '');
 app.get('/ReqMedia', cors(), (req, res) => {
     let imagesList = [];
 /*     console.log('fdb');

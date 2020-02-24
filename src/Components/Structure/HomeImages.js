@@ -16,12 +16,14 @@ export let HomeImages = () => {
       //setFileList(axiosGet('HomeImages', fileList));
       
     }
-    console.log(axiosGet('HomeImages', fileList));
+    setInterval(() => {
+      axiosGet('HomeImages', fileList);
+    }, 3000, fileList);
     
   },[fileList] );
   console.log("TCL: HomeImages -> fileList", fileList)
   let checkIncomingDataList = (incommingData) => {
-    incommingData
+
   }
   
   return (
