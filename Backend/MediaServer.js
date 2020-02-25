@@ -25,25 +25,25 @@ const port = backConfig.serverPort;
 }, app) */
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 //app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
-const directoryPath = path.join('./Backend/Images', '');
-app.get('/ReqMedia', cors(), (req, res) => {
+const directoryPath = path.join('./Backnd/Images', '');
+app.get('/ReqImage', cors(), (req, res) => {
     let imagesList = [];
 /*     console.log('fdb');
     fileSystem.writeFile('../../../../R/regedUser.json', JSON.stringify(regedUser //debugging , null, 2
         ), function(err) {console.log(err);
     }); */
     fileSystem.readdir(directoryPath, function (err, files) {
-        //handling error
+        if (files) res.status(200).send(files);
         if (err) {
-            return console.log('Unable to scan directory: ' + err);
-        } 
+            console.log('Unable to scan directory: ' + err);
+            res.status(500).send('Fel vid inläsning av bilder');
+        }
+
         //listing all files using forEach
-        files.forEach(function (file) {
-            // Do whatever you want to do with the file
-            console.log(file); 
-            imagesList.push(file);
-        });
-        res.status(200).send(imagesList);
+
+        //files.forEach((file) => imagesList.push(file));
+
+
     });
 
 });

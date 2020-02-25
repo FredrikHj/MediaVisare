@@ -2,15 +2,15 @@ import {BehaviorSubject} from "rxjs";
 let titleName = '';
 //let inlogedUserFullName = '';
 //let returningUserData = '';
-let folderFileListArr = [];
+let dataListObj = [];
 
-export const folderFileListArr$ = new BehaviorSubject(folderFileListArr);
+export const dataListObj$ = new BehaviorSubject(dataListObj);
 //===============================================
-export function updateFolderFileList(folderFileListArr){
-    console.log(folderFileListArr.length);
+export function updateDataListObj(dataListObj){
+    console.log(dataListObj.length);
     
-    if(folderFileListArr) {
-        folderFileListArr$.next(folderFileListArr);
+    if(dataListObj) {
+        dataListObj$.next(dataListObj);
     }
 }
 

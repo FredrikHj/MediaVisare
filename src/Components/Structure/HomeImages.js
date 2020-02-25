@@ -1,38 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import {Helmet} from "react-helmet";
-import { axiosGet } from '../Data/Axios'
+import { axiosGetImage } from '../Data/Axios'
 import { StyleHomeImages } from '../Style/StyleHomeImages';
-import { folderFileListArr$ } from '../Data/GlobalProps';
+import { dataListObj$ } from '../Data/GlobalProps';
 
 export let HomeImages = () => {
-  const [ incommingDataList, setIncommingDataList ] = useState([]);
+  const [ incommingDataListObj, setIncommingDataListObj ] = useState({});
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
-    if (incommingDataList.length === 0) {
-      setInterval(() => {
-        axiosGet('HomeImages', incommingDataList);
-      }, 3000, incommingDataList);
-    }
-
-     folderFileListArr$.subscribe((folderFileListArr) => {
-      console.log("TCL: HomeImages -> folderFileListArr", folderFileListArr)
-      if (folderFileListArr !== incommingDataList) {
-        console.log('fdbfd');
-        
-        console.log("TCL: HomeImages -> fileList", fileList)
-        setIncommingDataList(folderFileListArr);      
+    axiosGetImage(incommingDataListObj);
+    dataListObj$.subscribe((dataListObj) => {
+    console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
+      if (dataListObj !== incommingDataListObj) {
+        setIncommingDataListObj(dataListObj);
       }
     });
-},[incommingDataList] );
+    setInterval(() => {
+      axiosGetImage(incommingDataListObj);
+    }, 3000, incommingDataListObj);
+  },[ incommingDataListObj ] );
+
   let sortDataList = (item, index) => {
     let pushtoFileList = [...fileList ];
     if ( item.includes('.')) {
       pushtoFileList.push(item);
       setFileList(pushtoFileList);
-    }   
+    }
+    
   };
-  console.log("TCL: HomeImages -> fileList", incommingDataList)
+  console.log("TCL: HomeImages -> fileList", fileList)
   let checkIncomingDataList = (incommingData) => {
 
   }
@@ -46,8 +43,8 @@ export let HomeImages = () => {
       <aside >
       Bilder:
        <StyleHomeImages.folderFilePath>
-          {(incommingDataList.length !== 0)
-            ? incommingDataList.map((item, index) => {
+          {(incommingDataListObj)
+            ? incommingDataListObj.map((item, index) => {
               sortDataList(item, index);
                 return(
                   <StyleHomeImages.iconMeasurement key={ index }>
@@ -57,7 +54,7 @@ export let HomeImages = () => {
                   </StyleHomeImages.iconMeasurement>
                 );
               })
-            : 'inget inläst'
+            : (incommingDataListObj === {}) ? incommingDataListObj : null
           }
        </StyleHomeImages.folderFilePath>
        'Mapp och filer kommer här'
