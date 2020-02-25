@@ -9,25 +9,30 @@ export let HomeImages = () => {
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
-    axiosGet('HomeImages', incommingDataList);
-    folderFileListArr$.subscribe((folderFileListArr) => {
-      if (incommingDataList.length === 0) {
-        setIncommingDataList(folderFileListArr);
+    if (incommingDataList.length === 0) {
+      setInterval(() => {
+        axiosGet('HomeImages', incommingDataList);
+      }, 3000, incommingDataList);
+    }
+
+     folderFileListArr$.subscribe((folderFileListArr) => {
+      console.log("TCL: HomeImages -> folderFileListArr", folderFileListArr)
+      if (folderFileListArr !== incommingDataList) {
+        console.log('fdbfd');
+        
+        console.log("TCL: HomeImages -> fileList", fileList)
+        setIncommingDataList(folderFileListArr);      
       }
-    }, [fileList ] );
-  },[ incommingDataList ] );
+    });
+},[incommingDataList] );
   let sortDataList = (item, index) => {
     let pushtoFileList = [...fileList ];
     if ( item.includes('.')) {
       pushtoFileList.push(item);
       setFileList(pushtoFileList);
-    }
-    setInterval(() => {
-      axiosGet('HomeImages', fileList);
-    }, 3000, fileList);
-    
+    }   
   };
-  console.log("TCL: HomeImages -> fileList", fileList)
+  console.log("TCL: HomeImages -> fileList", incommingDataList)
   let checkIncomingDataList = (incommingData) => {
 
   }
@@ -41,7 +46,7 @@ export let HomeImages = () => {
       <aside >
       Bilder:
        <StyleHomeImages.folderFilePath>
-          {(incommingDataList.legnth !== 0)
+          {(incommingDataList.length !== 0)
             ? incommingDataList.map((item, index) => {
               sortDataList(item, index);
                 return(

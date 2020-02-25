@@ -19,12 +19,13 @@ const port = backConfig.serverPort;
 
 // MYSQL module for connection
 //var mysql = require('mysql');
-https.createServer({
-    key: fileSystem.readFileSync('server.key'),
-    cert: fileSystem.readFileSync('server.cert')
-}, app).listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
+/* https.createServer({
+    key: fileSystem.readFileSync('Backend/server.key'),
+    cert: fileSystem.readFileSync('Backend/server.cert')
+}, app) */
+app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 //app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
-const directoryPath = path.join('./Images', '');
+const directoryPath = path.join('./Backend/Images', '');
 app.get('/ReqMedia', cors(), (req, res) => {
     let imagesList = [];
 /*     console.log('fdb');
