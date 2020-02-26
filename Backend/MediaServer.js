@@ -4,7 +4,7 @@ var https = require('https');
 const app = express();
 let cors = require('cors');
 const fileSystem = require('fs');
-
+const firstRun = 0;
 // Module for handle the user logins
 //let jwt = require('jsonwebtoken');
 
@@ -25,9 +25,11 @@ const port = backConfig.serverPort;
 }, app) */
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 //app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
-const directoryPath = path.join('./Backnd/Images', '');
+const directoryPath = path.join('./Backend/Images', '');
 app.get('/ReqImage', cors(), (req, res) => {
     let imagesList = [];
+    console.log(req);
+    
 /*     console.log('fdb');
     fileSystem.writeFile('../../../../R/regedUser.json', JSON.stringify(regedUser //debugging , null, 2
         ), function(err) {console.log(err);

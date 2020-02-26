@@ -13,12 +13,12 @@ export let HomeImages = () => {
     dataListObj$.subscribe((dataListObj) => {
     console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
       if (dataListObj !== incommingDataListObj) {
-        setIncommingDataListObj(dataListObj);
+        //setIncommingDataListObj(dataListObj);
       }
     });
-    setInterval(() => {
+/*     setInterval(() => {
       axiosGetImage(incommingDataListObj);
-    }, 3000, incommingDataListObj);
+    }, 3000, incommingDataListObj); */
   },[ incommingDataListObj ] );
 
   let sortDataList = (item, index) => {
@@ -43,19 +43,19 @@ export let HomeImages = () => {
       <aside >
       Bilder:
        <StyleHomeImages.folderFilePath>
-          {(incommingDataListObj)
+{/*           {(incommingDataListObj)
             ? incommingDataListObj.map((item, index) => {
               sortDataList(item, index);
                 return(
                   <StyleHomeImages.iconMeasurement key={ index }>
 
-                      {/* <img src={require(`../../Images/${item}`)} alt="erge" width="60"/> */}
+                      {/* <img src={require(`../../Images/${item}`)} alt="erge" width="60"/>}
 
                   </StyleHomeImages.iconMeasurement>
                 );
               })
             : (incommingDataListObj === {}) ? incommingDataListObj : null
-          }
+          } */}
        </StyleHomeImages.folderFilePath>
        'Mapp och filer kommer här'
 

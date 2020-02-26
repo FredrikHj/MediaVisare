@@ -6,7 +6,8 @@ let url = 'http://localhost';
 let mediaFilesObj = {};
 
 export let axiosGetImage = (incommingDataList) => {
-    axios.get(`${url}:3001/ReqImage`).then(response => {
+    let firstRun = {firstRun: true};
+    axios.get(`${url}:3001/ReqImage`, firstRun).then(response => {
         console.log("TCL: HomeImages -> response", response)
         console.log(incommingDataList);
         updateDataListObj(setMediaFilesObj(response.data, response.status, response.statusText));
