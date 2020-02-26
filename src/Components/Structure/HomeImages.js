@@ -3,13 +3,14 @@ import {Helmet} from "react-helmet";
 import { axiosGetImage } from '../Data/Axios'
 import { StyleHomeImages } from '../Style/StyleHomeImages';
 import { dataListObj$ } from '../Data/GlobalProps';
-
+let reqToBackend = 0;
 export let HomeImages = () => {
   const [ incommingDataListObj, setIncommingDataListObj ] = useState({});
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
-    axiosGetImage(incommingDataListObj);
+    reqToBackend++;
+    axiosGetImage(incommingDataListObj, reqToBackend);
     dataListObj$.subscribe((dataListObj) => {
     console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
       if (dataListObj !== incommingDataListObj) {
