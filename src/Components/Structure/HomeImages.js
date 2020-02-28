@@ -5,7 +5,7 @@ import { StyleHomeImages } from '../Style/StyleHomeImages';
 import { dataListObj$ } from '../Data/GlobalProps';
 let reqToBackend = 0;
 export let HomeImages = () => {
-  const [ incommingDataListObj, setIncommingDataListObj ] = useState({});
+  const [ incommingDataListObj, setIncommingDataListObj ] = useState([]);
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
@@ -13,24 +13,23 @@ export let HomeImages = () => {
     axiosGetImage(incommingDataListObj, reqToBackend);
     dataListObj$.subscribe((dataListObj) => {
     console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
-      if (dataListObj !== incommingDataListObj) {
-        //setIncommingDataListObj(dataListObj);
-      }
+      let incommingDataArr = dataListObj.data;
+        setIncommingDataListObj(incommingDataArr);
     });
-/*     setInterval(() => {
+   setInterval(() => {
       axiosGetImage(incommingDataListObj);
-    }, 3000, incommingDataListObj); */
-  },[ incommingDataListObj ] );
+    }, 3000, incommingDataListObj);
+  },[] );
 
   let sortDataList = (item, index) => {
-    let pushtoFileList = [...fileList ];
+/*     let pushtoFileList = [...fileList ];
     if ( item.includes('.')) {
       pushtoFileList.push(item);
       setFileList(pushtoFileList);
     }
-    
+     */
   };
-  console.log("TCL: HomeImages -> fileList", fileList)
+
   let checkIncomingDataList = (incommingData) => {
 
   }
@@ -44,19 +43,18 @@ export let HomeImages = () => {
       <aside >
       Bilder:
        <StyleHomeImages.folderFilePath>
-{/*           {(incommingDataListObj)
+         {(incommingDataListObj)
             ? incommingDataListObj.map((item, index) => {
               sortDataList(item, index);
+              console.log("TCL: HomeImages -> item", item)
                 return(
                   <StyleHomeImages.iconMeasurement key={ index }>
-
-                      {/* <img src={require(`../../Images/${item}`)} alt="erge" width="60"/>}
-
+                    <img src={require(`../../Backend/Images/${item}`)} alt="erge" width="60"/> }
                   </StyleHomeImages.iconMeasurement>
                 );
               })
             : (incommingDataListObj === {}) ? incommingDataListObj : null
-          } */}
+          }
        </StyleHomeImages.folderFilePath>
        'Mapp och filer kommer här'
 
