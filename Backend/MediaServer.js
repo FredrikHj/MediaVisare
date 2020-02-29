@@ -29,6 +29,7 @@ const port = backConfig.serverPort;
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 //app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
 const directoryPath = path.join('./Backend/Images', '');
+console.log("directoryPath", directoryPath)
 app.get('/ReqImage:runNr', (req, res) => {
     let imagesList = [];
     let reqRun = parseInt(req.params.runNr);
@@ -39,7 +40,7 @@ app.get('/ReqImage:runNr', (req, res) => {
         ), function(err) {console.log(err);
     }); */
     fileSystem.readdir(directoryPath, function (err, files) {
-        if (reqRun === 1) res.status(200).send(files);
+        if (reqRun === 1) res.status(200).send(fixSendList(files));
         if (err) {
             console.log('Unable to scan directory: ' + err);
             res.status(500).send('Fel vid inläsning av bilder');
@@ -52,3 +53,10 @@ app.get('/ReqImage:runNr', (req, res) => {
     });
 
 });
+let fixSendList = (files) => {
+    let sendListObj = {
+        data: files,
+        path: directoryPath,
+    };
+    return sendListObj;
+};
