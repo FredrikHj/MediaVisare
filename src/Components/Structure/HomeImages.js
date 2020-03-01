@@ -5,19 +5,24 @@ import { StyleHomeImages } from '../Style/StyleHomeImages';
 import { dataListObj$ } from '../Data/GlobalProps';
 let reqToBackend = 1;
 export let HomeImages = () => {
-  const [ incommingDataListObj, setIncommingDataListObj ] = useState([]);
+  const [ incommingDataList, setIncommingDataList ] = useState([]);
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
-    axiosGetImage(incommingDataListObj, reqToBackend);
+    axiosGetImage(reqToBackend);
     dataListObj$.subscribe((dataListObj) => {
-    console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
-      let incommingDataArr = dataListObj.data;
-      setIncommingDataListObj(incommingDataArr);
+      console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
+      console.log("HomeImages -> dataListObj", dataListObj)
+      if (dataListObj) {
+        
+        setIncommingDataList(dataListObj.data);
+      }
     });
+    if (incommingDataList === undefined) console.log('fs<f');
+    ;
     reqToBackend = 2;
-/*     setInterval(() => {
-      axiosGetImage(incommingDataListObj, reqToBackend);
+    /*     setInterval(() => {
+      axiosGetImage(reqToBackend);
     }, 3000, incommingDataListObj, reqToBackend); */
   },[] );
   
@@ -33,7 +38,8 @@ export let HomeImages = () => {
   let checkIncomingDataList = (incommingData) => {
     
   }
-    return (
+  console.log("HomeImages -> incommingDataList", incommingDataList);
+  return (
     <StyleHomeImages.container>
       <Helmet>
         <meta charSet="utf-8" />
@@ -42,17 +48,17 @@ export let HomeImages = () => {
       <aside >
       Bilder:
        <StyleHomeImages.folderFilePath>
-         {/* {(incommingDataListObj)
-            ? incommingDataListObj.map((item, index) => {
+        {/*   {(incommingDataList.data === [])
+            ? incommingDataList.data.map((item, index) => {
               sortDataList(item, index);
               console.log("TCL: HomeImages -> item", item)
                 return(
                   <StyleHomeImages.iconMeasurement key={ index }>
-                  {/* <img src={incommingDataListObj.path + item} alt="erge" width="60"/>}
+                  <img src={incommingDataListObj.path + item} alt="erge" width="60"/>
                   </StyleHomeImages.iconMeasurement>
                 );
               })
-            : (incommingDataListObj === {}) ? incommingDataListObj : null
+            : 'fewf'
           } */}
        </StyleHomeImages.folderFilePath>
        'Mapp och filer kommer här'
