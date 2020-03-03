@@ -28,10 +28,9 @@ const port = backConfig.serverPort;
 }, app) */
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 //app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
-const directoryPath = path.join('./Backnd/Images', '');
+const directoryPath = path.join('./Backend/Images', '');
 console.log("directoryPath", directoryPath)
 app.get('/ReqImage:runNr', (req, res) => {
-    let imagesList = [];
     let reqRun = parseInt(req.params.runNr);
     console.log(reqRun);
     
@@ -56,7 +55,7 @@ let fixSendList = (files) => {
         files = "Inga bilder :(";
     }
     let sendListObj = {
-        data: files,
+        data: `${directoryPath}/${files}`,
         path: directoryPath,
     };
     return sendListObj;

@@ -14,16 +14,16 @@ export let HomeImages = () => {
       console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
       console.log("HomeImages -> dataListObj", dataListObj)
       if (dataListObj) {
-        
+        if (dataListObj.length === 0) return;
         setIncommingDataList(dataListObj.data);
       }
     });
-    if (incommingDataList === undefined) console.log('fs<f');
+    if (incommingDataList === undefined || incommingDataList === []) return;
     ;
-    reqToBackend = 2;
-    /*     setInterval(() => {
+    //reqToBackend = 2;
+    setInterval(() => {
       axiosGetImage(reqToBackend);
-    }, 3000, incommingDataListObj, reqToBackend); */
+    }, 3000, reqToBackend);
   },[] );
   
   let sortDataList = (item, index) => {
@@ -47,22 +47,20 @@ export let HomeImages = () => {
       </Helmet>
       <aside >
       Bilder:
-       <StyleHomeImages.folderFilePath>
-        {/*   {(incommingDataList.data === [])
-            ? incommingDataList.data.map((item, index) => {
+      <StyleHomeImages.folderFilePath>
+        {(incommingDataList === [])
+          ? incommingDataList.data.map((item, index) => {
               sortDataList(item, index);
               console.log("TCL: HomeImages -> item", item)
                 return(
                   <StyleHomeImages.iconMeasurement key={ index }>
-                  <img src={incommingDataListObj.path + item} alt="erge" width="60"/>
+                  {/* <img src={incommingDataListObj.path + item} alt="erge" width="60"/> */}
                   </StyleHomeImages.iconMeasurement>
                 );
               })
-            : 'fewf'
-          } */}
+            : `${ incommingDataList.data }`
+          }
        </StyleHomeImages.folderFilePath>
-       'Mapp och filer kommer här'
-
       </aside>
       <main id="appBody__mainContent">
         

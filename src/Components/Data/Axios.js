@@ -15,6 +15,9 @@ console.log("axiosGetImage -> runNr", runNr)
         console.log(error.response);
         let errResp = error.response;
 
+        // Run if Backend is not running
+        if(errResp === undefined) return;
+        
         updateDataListObj(setMediaFilesObj(errResp.data, errResp.status, errResp.statusText));
     });
     
