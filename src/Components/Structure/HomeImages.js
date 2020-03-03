@@ -20,7 +20,7 @@ export let HomeImages = () => {
     });
     if (incommingDataList === undefined || incommingDataList === []) return;
     ;
-    //reqToBackend = 2;
+    reqToBackend = 2;
     setInterval(() => {
       axiosGetImage(reqToBackend);
     }, 3000, reqToBackend);
@@ -58,7 +58,7 @@ export let HomeImages = () => {
                   </StyleHomeImages.iconMeasurement>
                 );
               })
-            : `${ incommingDataList.data }`
+            : `${ incommingDataList.data }vfd`
           }
        </StyleHomeImages.folderFilePath>
       </aside>
