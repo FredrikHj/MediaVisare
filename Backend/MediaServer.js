@@ -1,7 +1,7 @@
 // Creates a Express server in Node JS and use diff... modules    
 const express = require('express');
 var https = require('https');
-
+var http = require('http');
 const app = express();
 app.use(express.json());
 let cors = require('cors');
@@ -27,52 +27,37 @@ const port = backConfig.serverPort;
     cert: fileSystem.readFileSync('Backend/server.cert')
 }, app) */
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
-//app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
 const directoryPath = path.join('./Backend/Images', '');
 let correctFolderName = directoryPath.replace('\\', '/');
-console.log("directoryPath", directoryPath)
-let sendList = [];
-app.get('/ReqImage:runNr', (req, res) => {
-    let reqRun = parseInt(req.params.runNr);
-    console.log(reqRun);
-     
-    /*     console.log('fdb');
-    fileSystem.writeFile('../../../../R/regedUser.json', JSON.stringify(regedUser //debugging , null, 2
-        ), function(err) {console.log(err);
-        }); */
-        fileSystem.readdir(directoryPath, function (err, files) {
-            // Send first time request
-            for (let index = 0; index < files.length; index++) {
-                let correctName = `${correctFolderName}/${files[index]}`;
-                if (reqRun === 1) sendList.push(correctName);
-                if (reqRun > 1 && correctName !== sendList[index]);
-                console.log("sendList[index]", sendList[index])
-                console.log("correctName", correctName)
-                    console.log('rgrg');
-                    
-                 
-            };
 
-        console.log("checkAlreadySent -> sendList", sendList)
-        if (reqRun === 1) res.status(200).send(sendList);     
-        //if (reqRun > 1) res.status(200).send(checkAlreadySent(files));
+
+console.log("directoryPath", directoryPath)
+let dataList = [];
+
+let updateDataList = () => {
+    fileSystem.readdir(directoryPath, function (err, files) {
         
-        
-        if (err) res.status(500).send(`Fel vid inläsning av bilder: ${err}`);
+        // Send first time request
+        for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
+            let correctFilesName = `${correctFolderName}/${files[fileIndex]}`;
+            dataList.push(correctFilesName);
+        }
+    }); 
+}
+
+app.get('/ReqImage', (req, res) => {
+    updateDataList();
+    
+    
+    setTimeout(() => {
+        console.log("updateDataList -> dataList", dataList)
+        res.status(200).send(dataList);
+    }, 1000);
+    
+        //if (err) res.status(500).send(`Fel vid inläsning av bilder: ${err}`);
         
         //listing all files using forEach
         
         //files.forEach((file) => imaffesr
-        
-    });
-
-    
+    dataList = [];
 });
-let checkAlreadySent = (dataList) => {
-    console.log("checkAlreadySent -> file", dataList)
-    for (let index = 0; index < sendList.length; index++) {
-        if (file === sendList[index]) return;
-        else console.log('fer');        
-    }
-    
-}

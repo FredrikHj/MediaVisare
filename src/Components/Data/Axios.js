@@ -5,10 +5,9 @@ import { updateDataListObj } from '../Data/GlobalProps';
 let url = 'http://localhost';
 let mediaFilesObj = {};
 
-export let axiosGetImage = (runNr) => {
-console.log("axiosGetImage -> runNr", runNr)
+export let axiosGetImage = () => {
 
-    axios.get(`${url}:3001/ReqImage${runNr}`).then(response => {
+    axios.get(`${url}:3001/ReqImage`).then(response => {
         console.log("TCL: HomeImages -> response", response)
         updateDataListObj(setMediaFilesObj(response.data, response.status, response.statusText));
     }).catch(error => {

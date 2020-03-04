@@ -9,22 +9,27 @@ export let HomeImages = () => {
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
-    axiosGetImage(reqToBackend);
+    axiosGetImage();
+    if (reqToBackend === 1) {
+      reqToBackend = 2;
+      setInterval(() => {
+        axiosGetImage();
+      }, 2000); 
+    }
+    
     dataListObj$.subscribe((dataListObj) => {
       console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
       console.log("HomeImages -> dataListObj", dataListObj)
       if (dataListObj) {
         if (dataListObj.length === 0) return;
         setIncommingDataList(dataListObj.data);
+        
       }
     });
     if (incommingDataList === undefined || incommingDataList === []) return;
-    ;
-    reqToBackend = 2;
-    setInterval(() => {
-      axiosGetImage(reqToBackend);
-    }, 3000, reqToBackend);
+
   },[] );
+
   
   let sortDataList = (item, index) => {
     /*     let pushtoFileList = [...fileList ];
@@ -48,17 +53,20 @@ export let HomeImages = () => {
       <aside >
       Bilder:
       <StyleHomeImages.folderFilePath>
-        {(incommingDataList === [])
-          ? incommingDataList.data.map((item, index) => {
-              sortDataList(item, index);
-              console.log("TCL: HomeImages -> item", item)
-                return(
-                  <StyleHomeImages.iconMeasurement key={ index }>
-                  {/* <img src={incommingDataListObj.path + item} alt="erge" width="60"/> */}
-                  </StyleHomeImages.iconMeasurement>
-                );
-              })
-            : `${ incommingDataList.data }vfd`
+        {(incommingDataList.length !== 0) 
+            ?(incommingDataList === [])
+              ? incommingDataList.data.map((item, index) => {
+                  sortDataList(item, index);
+                  console.log("TCL: HomeImages -> item", item)
+                    return(
+                      <StyleHomeImages.iconMeasurement key={ index }>
+                      {/* <img src={incommingDataListObj.path + item} alt="erge" width="60"/> */}
+                      </StyleHomeImages.iconMeasurement>
+                    );
+                  })
+                : `${ incommingDataList.data }vfd`
+              
+          : 'Servern är inte igång!'
           }
        </StyleHomeImages.folderFilePath>
       </aside>
