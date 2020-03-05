@@ -9,12 +9,11 @@ export let HomeImages = () => {
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
-    axiosGetImage();
     if (reqToBackend === 1) {
-      reqToBackend = 2;
       setInterval(() => {
         axiosGetImage();
       }, 2000); 
+      reqToBackend = 2;
     }
     
     dataListObj$.subscribe((dataListObj) => {
@@ -28,7 +27,7 @@ export let HomeImages = () => {
     });
     if (incommingDataList === undefined || incommingDataList === []) return;
 
-  },[] );
+  },[incommingDataList] );
 
   
   let sortDataList = (item, index) => {
@@ -53,20 +52,17 @@ export let HomeImages = () => {
       <aside >
       Bilder:
       <StyleHomeImages.folderFilePath>
-        {(incommingDataList.length !== 0) 
-            ?(incommingDataList === [])
-              ? incommingDataList.data.map((item, index) => {
-                  sortDataList(item, index);
-                  console.log("TCL: HomeImages -> item", item)
-                    return(
-                      <StyleHomeImages.iconMeasurement key={ index }>
-                      {/* <img src={incommingDataListObj.path + item} alt="erge" width="60"/> */}
-                      </StyleHomeImages.iconMeasurement>
-                    );
-                  })
-                : `${ incommingDataList.data }vfd`
-              
-          : 'Servern är inte igång!'
+        {(incommingDataList !== [])
+          ? incommingDataList.map((item, index) => {
+             
+              console.log("TCL: HomeImages -> item", item)
+                return(
+                  <StyleHomeImages.iconMeasurement key={ index }>
+                    <img src={`http://localhost:3001/${item}`} alt="erge" width="60"/>
+                  </StyleHomeImages.iconMeasurement>
+                );
+              })
+            : 'rvd'
           }
        </StyleHomeImages.folderFilePath>
       </aside>

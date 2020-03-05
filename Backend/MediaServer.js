@@ -28,7 +28,8 @@ const port = backConfig.serverPort;
 }, app) */
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 const directoryPath = path.join('./Backend/Images', '');
-let correctFolderName = directoryPath.replace('\\', '/');
+let correctFolderName = directoryPath.replace('\\', '/').replace('Backend/', '');
+console.log("correctFolderName", correctFolderName)
 
 
 console.log("directoryPath", directoryPath)
@@ -51,6 +52,7 @@ app.get('/ReqImage', (req, res) => {
     
     setTimeout(() => {
         console.log("updateDataList -> dataList", dataList)
+        res.set({'Content-Type': 'image/jpg'}); 
         res.status(200).send(dataList);
     }, 1000);
     
