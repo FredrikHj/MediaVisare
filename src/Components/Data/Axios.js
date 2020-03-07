@@ -7,8 +7,9 @@ let mediaFilesObj = {};
 
 export let axiosGetImage = () => {
 
-    axios.get(`${url}:3001/ReqImage`).then(response => {
+    axios.get(`${url}:3001/ReqImage`, {responseType: 'blob'}).then(response => {
         console.log("TCL: HomeImages -> response", response)
+        
         updateDataListObj(setMediaFilesObj(response.data, response.status, response.statusText));
     }).catch(error => {
         console.log(error.response);
