@@ -10,9 +10,9 @@ export let HomeImages = () => {
 
   useEffect(() => {
     if (reqToBackend === 1) {
-      axiosGetImage();
-/*       setInterval(() => {
-      }, 2000);  */
+      setInterval(() => {
+        axiosGetImage();
+      }, 2000);
       reqToBackend = 2;
     }
     
@@ -22,8 +22,8 @@ export let HomeImages = () => {
       if (dataListObj) {
         if (dataListObj.length === 0) return;
           if (dataListObj.data.type !== undefined){
-          let file = new File( ['img'], dataListObj.data, { type: dataListObj.data.type } ); 
-          console.log("HomeImages -> file", file)
+          let file = new File([], dataListObj.data, { type: dataListObj.data.type } ); 
+          console.log("HomeImages -> file", file.name)
           let imageUrl = URL.createObjectURL(file); 
           console.log("HomeImages -> imageUrl", imageUrl);
           setIncommingDataList(imageUrl);
@@ -58,8 +58,7 @@ export let HomeImages = () => {
       <aside >
       Bilder:
       <StyleHomeImages.folderFilePath>
-      <img src={ incommingDataList } alt="erge" //width="60"
-      />
+      <img src={ incommingDataList } alt="erge" width="60"/>
 {/*         {(incommingDataList !== [])
           ? incommingDataList.map((item, index) => {
              
