@@ -10,9 +10,9 @@ export let HomeImages = () => {
 
   useEffect(() => {
     if (reqToBackend === 1) {
-      setInterval(() => {
-        axiosGetImage();
-      }, 2000); 
+      axiosGetImage();
+/*       setInterval(() => {
+      }, 2000);  */
       reqToBackend = 2;
     }
     
@@ -25,7 +25,7 @@ export let HomeImages = () => {
           let file = new File( ['img'], dataListObj.data, { type: dataListObj.data.type } ); 
           console.log("HomeImages -> file", file)
           let imageUrl = URL.createObjectURL(file); 
-          console.log("HomeImages -> imageUrl", imageUrl)
+          console.log("HomeImages -> imageUrl", imageUrl);
           setIncommingDataList(imageUrl);
         }
         
