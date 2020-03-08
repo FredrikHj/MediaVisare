@@ -22,8 +22,8 @@ export let HomeImages = () => {
       if (dataListObj) {
         if (dataListObj.length === 0) return;
           if (dataListObj.data.type !== undefined){
-          let file = new File([], dataListObj.data, { type: dataListObj.data.type } ); 
-          console.log("HomeImages -> file", file.name)
+          let file = new File(['img'], dataListObj.data, { type: dataListObj.data.type } ); 
+          console.log("HomeImages -> file", file)
           let imageUrl = URL.createObjectURL(file); 
           console.log("HomeImages -> imageUrl", imageUrl);
           setIncommingDataList(imageUrl);
@@ -58,23 +58,24 @@ export let HomeImages = () => {
       <aside >
       Bilder:
       <StyleHomeImages.folderFilePath>
-      <img src={ incommingDataList } alt="erge" width="60"/>
 {/*         {(incommingDataList !== [])
           ? incommingDataList.map((item, index) => {
-             
-              console.log("TCL: HomeImages -> item", item)
-                return(
-                  <StyleHomeImages.iconMeasurement key={ index }>
-                    <img src={`http://localhost:3001/${item}`} alt="erge" width="60"/>
-                  </StyleHomeImages.iconMeasurement>
-                );
-              })
+            
+            console.log("TCL: HomeImages -> item", item)
+            return(
+              <StyleHomeImages.iconMeasurement key={ index }>
+              <img src={`http://localhost:3001/${item}`} alt="erge" width="60"/>
+              </StyleHomeImages.iconMeasurement>
+              );
+            })
             : 'rvd'
           } */}
        </StyleHomeImages.folderFilePath>
       </aside>
       <main id="appBody__mainContent">
         
+      <img src={ incommingDataList } alt="erge"// width="60"
+      />
       </main>
       <footer id="actionBtnContainer">
 

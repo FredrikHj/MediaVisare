@@ -28,11 +28,11 @@ const port = backConfig.serverPort;
     cert: fileSystem.readFileSync('Backend/server.cert')
 }, app) */
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
-const directoryPath = path.join(__dirname, 'hej.jpg');
+const directoryPath = path.join(__dirname, 'Images/hej.jpeg');
 
 let imgRootDirectory = '/Images/';
 
-let correctFolderName = directoryPath.replace('\\', '/').replace('Backend/', '');
+let correctFolderName = directoryPath.replace('\\', '/');
 console.log("correctFolderName", correctFolderName)
 
 
@@ -55,7 +55,7 @@ app.get('/ReqImage', (req, res) => {
        
     setTimeout(() => {
         console.log("updateDataList -> dataList", dataList)
-        res.status(200).sendFile(directoryPath);
+        res.status(200).sendFile(correctFolderName);
         //res.set({'Content-Type': 'image/jpg'}); 
         //res.status(200).send(dataList);
 
