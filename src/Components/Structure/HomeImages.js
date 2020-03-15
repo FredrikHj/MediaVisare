@@ -21,7 +21,19 @@ export let HomeImages = () => {
     dataListObj$.subscribe((dataListObj) => {
     console.log("HomeImages -> dataListObj", dataListObj)
       if (dataListObj) {
+<<<<<<< HEAD
           setIncommingDataList(dataListObj.data);
+=======
+        if (dataListObj.length === 0) return;
+          if (dataListObj.data.type !== undefined){
+          let file = new File(['img'], dataListObj.data, { type: dataListObj.data.type } ); 
+          console.log("HomeImages -> file", file)
+          let imageUrl = URL.createObjectURL(file); 
+          console.log("HomeImages -> imageUrl", imageUrl);
+          setIncommingDataList(imageUrl);
+        }
+        
+>>>>>>> 5341eee822530b6d339dd4751f0b2a797d55be62
       }
     });
     
@@ -69,6 +81,8 @@ export let HomeImages = () => {
       </aside>
       <main id="appBody__mainContent">
         
+      <img src={ incommingDataList } alt="erge"// width="60"
+      />
       </main>
       <footer id="actionBtnContainer">
 

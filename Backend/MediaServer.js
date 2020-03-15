@@ -52,9 +52,31 @@ app.get('/ReqImage', (req, res) => {
        
     setTimeout(() => {
         console.log("updateDataList -> dataList", dataList)
+<<<<<<< HEAD
         res.set({'Content-Type': 'image/jpg'}); 
         res.status(200).send(dataList);
    }, 1000);
+=======
+        res.status(200).sendFile(correctFolderName);
+        //res.set({'Content-Type': 'image/jpg'}); 
+        //res.status(200).send(dataList);
+
+/*         const r = fileSystem.createReadStream(imgRootDirectory) // or any other way to get a readable stream
+        const ps = new stream.PassThrough() // <---- this makes a trick with stream error handling
+        stream.pipeline(
+         r,
+         ps, // <---- this makes a trick with stream error handling
+         (err) => {
+          if (err) {
+            console.log(err) // No such file or any other kind of error
+            return res.sendStatus(400); 
+          }
+        })
+        ps.pipe(res) // <---- this makes a trick with stream error handling */
+
+
+    }, 1000);
+>>>>>>> 5341eee822530b6d339dd4751f0b2a797d55be62
     
         //if (err) res.status(500).send(`Fel vid inläsning av bilder: ${err}`);
         
