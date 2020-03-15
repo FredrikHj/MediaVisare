@@ -7,7 +7,7 @@ let dataListObj = [];
 export const dataListObj$ = new BehaviorSubject(dataListObj);
 //===============================================
 export function updateDataListObj(dataListObj){
-    console.log(dataListObj.length);
+    console.log(dataListObj);
     
     if(dataListObj) {
         dataListObj$.next(dataListObj);

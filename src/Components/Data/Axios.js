@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { updateDataListObj } from '../Data/GlobalProps';
+import {serverUrl } from './runUrls';
 //let url = 'https://192.168.0.210';
-let url = 'http://localhost';
 let mediaFilesObj = {};
 
 export let axiosGetImage = () => {
 
-    axios.get(`${url}:3001/ReqImage`, {responseType: 'blob'}).then(response => {
+    axios.get(`${serverUrl}ReqImage`).then(response => {
         console.log("TCL: HomeImages -> response", response)
         
         updateDataListObj(setMediaFilesObj(response.data, response.status, response.statusText));

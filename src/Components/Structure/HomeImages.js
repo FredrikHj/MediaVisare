@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Helmet} from "react-helmet";
+import {serverUrl } from '../Data/runUrls';
+
 import { axiosGetImage } from '../Data/Axios'
 import { StyleHomeImages } from '../Style/StyleHomeImages';
 import { dataListObj$ } from '../Data/GlobalProps';
@@ -9,32 +11,24 @@ export let HomeImages = () => {
   const [ fileList, setFileList ] = useState([]);
 
   useEffect(() => {
-    if (reqToBackend === 1) {
-      setInterval(() => {
+/*     if (reqToBackend === 1) {
+      setInterval(() => { */
         axiosGetImage();
-      }, 2000);
+      //}, 2000);
       reqToBackend = 2;
-    }
-    
+    //}
+
     dataListObj$.subscribe((dataListObj) => {
-      console.log("TCL: HomeImages -> folderFileListArr", dataListObj)
-      console.log("HomeImages -> dataListObj", dataListObj.data);
+    console.log("HomeImages -> dataListObj", dataListObj)
       if (dataListObj) {
-        if (dataListObj.length === 0) return;
-          if (dataListObj.data.type !== undefined){
-          let file = new File([], dataListObj.data, { type: dataListObj.data.type } ); 
-          console.log("HomeImages -> file", file.name)
-          let imageUrl = URL.createObjectURL(file); 
-          console.log("HomeImages -> imageUrl", imageUrl);
-          setIncommingDataList(imageUrl);
-        }
-        
+          setIncommingDataList(dataListObj.data);
       }
     });
-    if (incommingDataList === undefined || incommingDataList === []) return;
-
+    
+    
+    if (incommingDataList === undefined) return;
   },[] );
-
+  
   
   let sortDataList = (item, index) => {
     /*     let pushtoFileList = [...fileList ];
@@ -58,20 +52,20 @@ export let HomeImages = () => {
       <aside >
       Bilder:
       <StyleHomeImages.folderFilePath>
-      <img src={ incommingDataList } alt="erge" width="60"/>
-{/*         {(incommingDataList !== [])
-          ? incommingDataList.map((item, index) => {
-             
-              console.log("TCL: HomeImages -> item", item)
-                return(
-                  <StyleHomeImages.iconMeasurement key={ index }>
-                    <img src={`http://localhost:3001/${item}`} alt="erge" width="60"/>
-                  </StyleHomeImages.iconMeasurement>
-                );
-              })
-            : 'rvd'
-          } */}
-       </StyleHomeImages.folderFilePath>
+         {(incommingDataList !== undefined)
+            ? (incommingDataList.length !== 0) ? incommingDataList.map((item, index) => {
+                
+                console.log("TCL: HomeImages -> item", item)
+                  return(
+                    <StyleHomeImages.iconMeasurement key={ index }>
+                      <img src={ serverUrl + item} alt="erge" width="80"/>
+                    </StyleHomeImages.iconMeasurement>
+                  );
+                })
+            : 'Finns inga bilder'
+          : null
+        }
+      </StyleHomeImages.folderFilePath>
       </aside>
       <main id="appBody__mainContent">
         
