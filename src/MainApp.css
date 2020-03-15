@@ -27,16 +27,6 @@
 /* ==================== Body and main parts ==================== */
 
 
-
-#appBody__mainContent{
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-
-
 /* Header ====================================================== */
 /
 #leftSide{
