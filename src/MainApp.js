@@ -1,54 +1,97 @@
-import React, { PureComponent } from 'react';
+/* ================================================== MainApp for the app ==================================================
+Imports module */
+import React, { useState, useEffect } from 'react';
 import {Helmet} from "react-helmet";
 // React Router - ES6 modules
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 
-import { logedIn$ } from './store';
+
+// Import style
+import { AppBodyStyle } from './Components/Style/AppBodyStyle';
+import { HeaderStyle } from './Components/Style/HeaderStyle';
+import { FooterStyle } from './Components/Style/FooterStyle';
+
+// Import inportant components for the specific page
+/* import { logedIn$ } from './store';
 import { Header } from './Components/Header';
-import { Login } from './Components/Login';
-import { MediaHome } from './Components/MediaHome';
+import { Login } from './Components/Login'; */
+import {MediaBtn } from './Components/Data/MediaBtn';
 
-class MainApp extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      authorizate: false,
-      logedIn: false,
-    } 
-  }
-  componentDidMount() {
-    let subscription = logedIn$.subscribe((logedIn) => { 
-      if (logedIn) {
-        this.setState({logedIn: logedIn$.value});
-      }
-    });
-    subscription.unsubscribe();
-    if (this.state.authorizate === false) return <Redirect to="/"/>;
-    let uriData = window.location.hash;
-  }
-  componentWillUnmount() {
+import { MediaChooser } from './Components/Structure/MediaChooser';
+import { routeName } from './Components/Data/RouteNames';
+import { gotoPage$ } from './Components/PropsStorage';
+import { axiosGet } from './Components/Data/Axios';
 
+import { from } from 'rxjs';
+
+
+let MainApp = () => {
+  let [ appUrl, setAppUrl ] = useState('/');
+  let [ redirectToPage, updateRedirectToPage ] = useState(window.location.pathname);
+  
+  useEffect(() => {
+/*     gotoPage$.subscribe((gotoPage) => {
+      updateRedirectToPage('/');
+    }); */
+    
+    console.log("routeName", routeName)
+  },[]);
+const runMediaMode = (e) =>{
+  const targetMode = e.target.id;
+  console.log("🚀 ~ file: MainApp.js ~ line 41 ~ runMediaMode ~ targetMode", targetMode)
+  if(targetMode === 'showImages') {
+    
+    // Run once then every 10 seconds
+    axiosGet('showImages');
+    setInterval(() => {
+      axiosGet('showImages');  
+    }, 10000);  
   }
-  render() {
-    return (
-      <>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>MediaVisare - {(this.state.logedIn === false ) ? 'Ej inloggad' : 'Inloggad' }
-          </title>
-          <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet">
-          </link>
-        </Helmet>
-        <Header/>
-            <Router> 
-              <Route exact path="/" component={ Login } />
-              <Route path="/MediaHome" component={ MediaHome }/>
-            </Router>
+  if(targetMode === 'showHomeMovies'){
+    axiosGet('showHomeMovies');
+  }
+}
+
+  return (
+    <AppBodyStyle.mainContainer>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Mediavisare</title>
+      </Helmet>
+      <HeaderStyle.mainContainer>
+        <HeaderStyle.headLine>
+          Mediavisare
+        </HeaderStyle.headLine>
+        <HeaderStyle.mediaBtnContainer>
+          <MediaBtn
+              btnOptional={ ''}
+              onClickFunction={ runMediaMode }
+              btnName={'Bilder'}
+              id={ 'showImages' }
+          
+          />
+          |
+          <MediaBtn
+            btnOptional={ '' }
+            onClickFunction={ runMediaMode }
+            btnName={'Filmer'}
+            id={ 'ShowHomeMovies' }
+        
+          />
+        </HeaderStyle.mediaBtnContainer>
+      </HeaderStyle.mainContainer>
       
-      </>
-    );
-  }
+      <Router>
+        {window.location.pathname === routeName.mainPage && <Redirect to={ 'MediaChooser'} />}
+        <Route path="/MediaChooser" component={ MediaChooser }/>
+      </Router>
+      
+
+      <FooterStyle.mainContainer>
+        Copyright: Fredrik Hjärperge
+      </FooterStyle.mainContainer>
+    </AppBodyStyle.mainContainer>
+  );
 }
 
 export default MainApp;

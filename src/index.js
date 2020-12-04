@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import { BrowseRouter as Router, Route, Link, Redirect} from "react-router-dom";    
-import './MainApp.css';
 import App from  './MainApp';
 import * as serviceWorker from './serviceWorker';
 
