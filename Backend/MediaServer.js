@@ -49,7 +49,7 @@ let requestMedia = () => {
         });
     });
 }
-let creatMediaObj = (file, correspondingIcon, storageType) => {
+let creatMediaObj = (file, correspondingIcon, objKey) => {
     //Get the file information
     let { size} = fileSystem.statSync(`${mediaImagesPath}\\${file}`);
     let { birthtime} = fileSystem.statSync(`${mediaImagesPath}\\${file}`);
@@ -62,7 +62,7 @@ let creatMediaObj = (file, correspondingIcon, storageType) => {
         cDate: birthtime,
         mDate: mtime,
     };
-    mediaListObj[storageType].push(mediaObj);
+    mediaListObj[objKey].push(mediaObj);
 
 }
 app.get('/ReqImages', (req, res) => {
