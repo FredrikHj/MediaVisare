@@ -19,8 +19,8 @@ import {MediaBtn } from './Components/Data/MediaBtn';
 
 import { MediaChooser } from './Components/Structure/MediaChooser';
 import { routeName } from './Components/Data/RouteNames';
-import { gotoPage$ } from './Components/PropsStorage';
-import { axiosGet } from './Components/Data/Axios';
+//import { gotoPage$ } from './Components/Data/PropsStorage';
+import { reqMedia } from './Components/Data/Axios';
 
 import { from } from 'rxjs';
 
@@ -32,8 +32,7 @@ let MainApp = () => {
   useEffect(() => {
 /*     gotoPage$.subscribe((gotoPage) => {
       updateRedirectToPage('/');
-    }); */
-    
+    }); */   
     console.log("routeName", routeName)
   },[]);
 const runMediaMode = (e) =>{
@@ -42,13 +41,13 @@ const runMediaMode = (e) =>{
   if(targetMode === 'showImages') {
     
     // Run once then every 10 seconds
-    axiosGet('showImages');
-    setInterval(() => {
-      axiosGet('showImages');  
-    }, 10000);  
+    reqMedia('showImages');
+/*     setInterval(() => {
+      reqMedia('showImages');  
+    }, 10000);   */
   }
   if(targetMode === 'showHomeMovies'){
-    axiosGet('showHomeMovies');
+    reqMedia('showHomeMovies');
   }
 }
 

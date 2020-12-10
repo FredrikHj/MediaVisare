@@ -22,20 +22,20 @@ export let MediaChooserStyle = {
         display: flex;
         flex-direction: row;
     `,
-    filesIcon: styled.section`
+    iconsContainer: styled.section`
         border: 5px solid orange;
         border-top-right-radius: 10vh; 
         border-bottom-right-radius: 10vh; 
-        width: 25%;
+        width: 60%;
         text-align: center;
         background-color: white;
     `,
-    viewer: styled.section`
+    viewerContainer: styled.section`
         border: 5px solid orange;
         border-top-left-radius: 10vh; 
         border-bottom-left-radius: 10vh; 
         margin-left: 5%;
-        width: 70%;
+        width: 35%;
         text-align: center;
         background-color: white;
         

@@ -9,24 +9,27 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { MediaChooserStyle } from '../Style/MediaChooserStyle';
 
 // Import inportant components for the specific page
+import { BackendURL } from'../Data/BackendURL';
+
 //import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 //import { MediaActionBtn } from '../Components - Old/MediaAction';
 //import { MediaContents } from '../Components - Old/MediaContents';
 //import { NavFileStructure } from '../Components - Old/NavFileStructure';
 
 //import { updateLogedIn } from '../store';
-
+import { IconViewer } from'./IconsViewer';
+import { incommingMediaObj$ } from'../Data/PropsStorage';
 
 export let MediaChooser = () => {
   let [ appUrl, setAppUrl ] = useState('/');
-  let [ redirectToPage, updateRedirectToPage ] = useState('');
-  
+  let [ mediaObj, updateMediaObj ] = useState();
+
   useEffect(() => {
-/*     gotoPage$.subscribe((gotoPage) => {
-      updateRedirectToPage(gotoPage);
-    }); */
-    
-  },[redirectToPage]);
+    incommingMediaObj$.subscribe((media) => {
+      updateMediaObj(media);
+    });
+  },[mediaObj]);
+  
   return (
     <MediaChooserStyle.mainContainer>
       <MediaChooserStyle.pathesContainer>
@@ -34,10 +37,17 @@ export let MediaChooser = () => {
       </MediaChooserStyle.pathesContainer>
 
       <MediaChooserStyle.mediaContent>
-        <MediaChooserStyle.filesIcon>
+        <MediaChooserStyle.iconsContainer>
           Mappar och ikoner {/* <NavFileStructure location={this.props.location} /> */}
-        </MediaChooserStyle.filesIcon>
-        <MediaChooserStyle.viewer>
+          <IconViewer 
+            mediaType={ ''}
+            name={ ''}
+            id={ '' }
+            mediaPath={ 'http://localhost:3001/ReqImages' }
+            altText={ '' }
+          />
+        </MediaChooserStyle.iconsContainer>
+        <MediaChooserStyle.viewerContainer>
           {
             'Mediavisaren med kontroll'
   /*           <MediaContents 
@@ -46,7 +56,7 @@ export let MediaChooser = () => {
               getFileItem={ this.getFileItem }
             /> 
   */        }
-        </MediaChooserStyle.viewer>
+        </MediaChooserStyle.viewerContainer>
 
       </MediaChooserStyle.mediaContent>
     </MediaChooserStyle.mainContainer>

@@ -2,17 +2,16 @@
 Imports module */
 import {BehaviorSubject} from "rxjs";
 
-import {getLocalStorageData} from './Data/LocalStorage';
-const incommingSQLDataArr = [];
-const optionColListArr = [];
+import {getLocalStorageData} from './LocalStorage';
+const incommingMediaObj = {};
 const headName = '';
-const gotoPage = '';
+const gotoMediaType = '';
 
 //===============================================
 
-export const incommingSQLDataArr$ = new BehaviorSubject(incommingSQLDataArr);
+export const incommingMediaObj$ = new BehaviorSubject(incommingMediaObj);
 export const headName$ = new BehaviorSubject(headName);
-export const gotoPage$ = new BehaviorSubject(gotoPage);
+export const gotoMediaType$ = new BehaviorSubject(gotoMediaType);
 export const LocalStorage$ = new BehaviorSubject('');
 
 export const updateLocalstorage = (saveLoginData) =>{
@@ -23,10 +22,10 @@ export const updateLocalstorage = (saveLoginData) =>{
 export function updateHeadName(headName){
     if(headName) headName$.next(headName);
 }
-export function updateSavedSQLData(incommingSQLDataArr){
-    if(incommingSQLDataArr) incommingSQLDataArr$.next(incommingSQLDataArr);
+export function updateMedia(incommingMediaObj){
+    if(incommingMediaObj) incommingMediaObj$.next(incommingMediaObj);
 }
-export function updateGotoPage(gotoPage){    
-    if(gotoPage) gotoPage$.next(gotoPage);
-    return gotoPage;
+export function updateMediaType(gotoMediaType){    
+    if(gotoMediaType) gotoMediaType$.next(gotoMediaType);
+    return gotoMediaType;
 }
