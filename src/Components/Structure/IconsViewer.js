@@ -7,10 +7,26 @@ import { MappFilesIconStyle } from '../Style/MappFilesIconsStyle';
 // Import inportant components for the specific page
 
 export let IconViewer = (props) => {
-   const { mediaType, name, id, mediaPath, altText } = props;
+   const { mediaObj } = props;
+    console.log("🚀 ~ file: iconsViewer.js ~ line 11 ~ IconViewer ~ mediaObj", mediaObj)
+    
     return( 
         <MappFilesIconStyle.iconContainer>
-            <MappFilesIconStyle.mediaIconImg src={ mediaPath }></MappFilesIconStyle.mediaIconImg>
+            {(mediaObj == {})
+                ?
+                    're'
+/*                     (mediaObj.files[0].mediaType === 'Images')
+                        ?
+                            mediaObj.files.map((item, index) => {
+                                console.log("🚀 ~ file: iconsViewer.js ~ line 17 ~ ?mediaObj.files.map ~ item", item)
+                                
+                                
+                            })
+                        : ''
+ */                : ''
+            }
         </MappFilesIconStyle.iconContainer>
     );
 }
+/*  <MappFilesIconStyle.mediaIconImg src={ 'mediaPath' }></MappFilesIconStyle.mediaIconImg>
+*/

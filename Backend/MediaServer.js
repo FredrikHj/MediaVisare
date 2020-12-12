@@ -1,14 +1,14 @@
 // Creates a Express server in Node JS and use diff... modules    
 const express = require('express');
 const app = express();
-app.use(express.json()) // for parsing application/json
+/* app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+ */
 // Filesystem components
 const fileSystem = require('fs');
 
 const mediaPath = require('path')
-const mediaRootPath = 'd:\\MediaViewer\\';
+const mediaRootPath = 'u:\\testMedia\\';
 app.use(express.static(mediaRootPath));
 
 let cors = require('cors');
@@ -26,11 +26,19 @@ app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`))
 // Media objekt
 let mediaListObj = { folders: [], files: [] };
 
-const mediaType = (incommingType) => {
+const filesOrFiles = (incommingType) => {
     // Check if incommingType is a file or not 
     let isFile = incommingType.includes('.');
     if(isFile === true) return 'files';
     if(isFile === false) return 'folders';
+}
+const fileType = (incommingType) => {
+    // Check if incommingType is a file or not 
+    let isImage = incommingType.includes('jpg', 'png');
+    console.log("🚀 ~ file: MediaServer.js ~ line 36 ~ fileType ~ incommingType", incommingType)
+    console.log("🚀 ~ file: MediaServer.js ~ line 38 ~ fileType ~ isFile", isImage)
+    if(isImage === true) return 'Images';
+    if(isImage === false) return 'HomeMovie';
 }
 let requestMedia = (mediaSubPatch) => {
     //mediaListObj.folders
@@ -41,26 +49,28 @@ let requestMedia = (mediaSubPatch) => {
         files.forEach((file) => {
             //Get the size of the incomming media
             
-            if(mediaType(file) === 'folders') {
+            if(filesOrFiles(file) === 'folders') {
                 const icon = false;
                 creatMediaObj(mediaSubPatch, file, icon, 'folders');
             }            
-            if(mediaType(file) === 'files'){
+            if(filesOrFiles(file) === 'files'){
                 
                 const icon = true;
-                creatMediaObj(mediaSubPatch, file, icon, 'files');
+                //if(fileType(file) === 'jpg' || fileType(file) === 'png' || fileType(file) === 'giff') 
+                creatMediaObj(mediaSubPatch, file, icon, 'files', fileType(file));
             }            
         });
     });
 }
-let creatMediaObj = (mediaSubPatch, file, correspondingIcon, objKey) => {
+let creatMediaObj = (mediaSubPatch, file, correspondingIcon, objKey, mediaPath) => {
     //Get the file information
     let { size} = fileSystem.statSync(`${mediaRootPath + mediaSubPatch}\\${file}`);
     let { birthtime} = fileSystem.statSync(`${mediaRootPath + mediaSubPatch}\\${file}`);
     let { mtime} = fileSystem.statSync(`${mediaRootPath + mediaSubPatch}\\${file}`);
     
     const mediaObj = {
-        mediaPath: mediaPath.dirname(file),
+        mediaType: mediaPath,
+        path: `/${mediaPath}/`,
         name: file,
         size: size,
         icon: correspondingIcon,
@@ -71,7 +81,7 @@ let creatMediaObj = (mediaSubPatch, file, correspondingIcon, objKey) => {
     mediaListObj[objKey].push(mediaObj);
     
 }
-app.get('/ReqImages', (req, res) => {
+app.get('/ReqMedia', (req, res) => {
     console.log('Requested ImagesObj');
     // Emtying the mediaObj
     mediaListObj = { folders: [], files: [] };
@@ -85,7 +95,7 @@ app.get('/ReqImages', (req, res) => {
     }, 500);
     
 });
-app.get('/ReqRawData:Media', (req, res) => {
+/* app.get('/ReqRawData:Media', (req, res) => {
     console.log('Requested Image rawData');
 
     const targetMedia = req.params.Media;
@@ -95,4 +105,4 @@ app.get('/ReqRawData:Media', (req, res) => {
     const mediaRawDataIndexNr = parseInt(mediaRawDataIndex);
 
     res.sendFile(`${mediaRootPath + mediaSubPath}\\${mediaListObj.files[mediaRawDataIndexNr].name}`);
-});
+}); */

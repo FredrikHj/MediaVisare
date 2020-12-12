@@ -29,6 +29,7 @@ export let MediaChooser = () => {
       updateMediaObj(media);
     });
   },[mediaObj]);
+  console.log("🚀 ~ file: MediaChooser.js ~ line 32 ~ MediaChooser ~ mediaObj", mediaObj)
   
   return (
     <MediaChooserStyle.mainContainer>
@@ -40,11 +41,7 @@ export let MediaChooser = () => {
         <MediaChooserStyle.iconsContainer>
           Mappar och ikoner {/* <NavFileStructure location={this.props.location} /> */}
           <IconViewer 
-            mediaType={ ''}
-            name={ ''}
-            id={ '' }
-            mediaPath={ 'http://localhost:3001/ReqImages' }
-            altText={ '' }
+            mediaObj={ mediaObj }
           />
         </MediaChooserStyle.iconsContainer>
         <MediaChooserStyle.viewerContainer>

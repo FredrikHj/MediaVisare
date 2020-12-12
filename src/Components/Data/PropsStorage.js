@@ -23,6 +23,7 @@ export function updateHeadName(headName){
     if(headName) headName$.next(headName);
 }
 export function updateMedia(incommingMediaObj){
+    console.log("🚀 ~ file: PropsStorage.js ~ line 26 ~ updateMedia ~ incommingMediaObj", incommingMediaObj)
     if(incommingMediaObj) incommingMediaObj$.next(incommingMediaObj);
 }
 export function updateMediaType(gotoMediaType){    

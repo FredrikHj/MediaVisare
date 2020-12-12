@@ -1,7 +1,6 @@
 /* ================================================== HeadBar ==================================================
 Imports module */
 import axios from 'axios';
-//import { updateSiteLoga, updateSavedSQLData, updateOptionColList, updateUserData, updateGotoPage } from '../Storage.js';
 
 // Import inportant components for the specific page
 import { updateMedia } from'./PropsStorage';
@@ -13,20 +12,27 @@ let listFileCount = 0;
 export let reqMedia = (reqType) => {
     console.log("🚀 ~ file: Axios.js ~ line 13 ~ reqMedia ~ reqType", reqType)
     // Type of post method
-    if (reqType === 'showImages') reqMediaBody('/ReqImages');
-    if (reqType === 'showHomeMovies') reqMediaBody('/ReqHomeMovies');
+    if (reqType === 'showImages') reqMediaRoute('/ReqMedia');
+    if (reqType === 'showHomeMovies') reqMediaRoute('/ReqHomeMovies');
 }
-let reqMediaBody = (routes) => {
-    axios.get(BackendURL + routes, ).then(response => {
+let reqMediaRoute = (routes) => {
+    axios.get(BackendURL + routes).then(response => {
         if(response.status === 200){
             //Save the incomming mediaObj into the mediaListObj created for the Frontend
             mediaListObj = response.data;
-            reqRawData('/ReqRawData', 'Images'); 
+            //reqRawData('/ReqRawData', 'Images'); 
         }
     }).
     catch(error => {});
+    setTimeout(() => {
+        console.log("🚀 ~ file: Axios.js ~ line 10 ~ mediaListObj", mediaListObj)
+        updateMediaObj();
+    }, 1000);
 }
-let reqRawData = (routes, mediaPath) => {  
+const updateMediaObj = () =>{
+    updateMedia(mediaListObj);
+}
+/* let reqRawData = (routes, mediaPath) => {  
     // Needed loops getting the rawData of a file and current loop getting the rawData
     let subPath = mediaPath;
     
@@ -36,6 +42,9 @@ let axiosGetRawData = (routes, subPath, index) => {
     let mediaIndexTot = 
     
     axios.get(BackendURL + routes + `${subPath}_${index}`).then(response => {      
+    console.log("🚀 ~ file: Axios.js ~ line 44 ~ updateMediaObj ~ mediaListObj", mediaListObj)
+    console.log("🚀 ~ file: Axios.js ~ line 44 ~ updateMediaObj ~ mediaListObj", mediaListObj)
+    console.log("🚀 ~ file: Axios.js ~ line 44 ~ updateMediaObj ~ mediaListObj", mediaListObj)
         if(response.status === 200) {
             mediaListObj.files[index].rawData = response.data;
         }
@@ -45,5 +54,4 @@ let axiosGetRawData = (routes, subPath, index) => {
 
     if(listFileCount < mediaListObj.files.length) axiosGetRawData('/ReqRawData', 'Images', listFileCount);
     else listFileCount = 0;
-    console.log("🚀 ~ file: Axios.js ~ line 43 ~ axios.get ~ mediaListObj", mediaListObj)
-}
+} */
