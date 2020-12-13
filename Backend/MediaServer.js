@@ -68,13 +68,15 @@ console.log("🚀 ~ file: MediaServer.js ~ line 64 ~ creatMediaObj ~ mediaPath",
     let { mtime} = fileSystem.statSync(`${mediaRootPath + mediaSubPatch}\\${file}`);
     
     const mediaObj = {
-        path: `/${mediaPath}/`,
+        id: 0,
         name: file,
-        size: size,
-        icon: correspondingIcon,
-        rawData: '',
         cDate: birthtime,
         mDate: mtime,
+        path: `/${mediaPath}/`,
+        size: size,
+        descrption: 'Vill du ha en beskrivining? Skapa en txt fil och lägg i samma mapp som aktuell bild',
+        icon: correspondingIcon,
+        rawData: '',
     };
     mediaListObj[objKey].push(mediaObj);
     
