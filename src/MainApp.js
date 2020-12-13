@@ -30,6 +30,8 @@ let MainApp = () => {
   let [ redirectToPage, updateRedirectToPage ] = useState(window.location.pathname);
   
   useEffect(() => {
+    reqMedia('showImages');
+
 /*     gotoPage$.subscribe((gotoPage) => {
       updateRedirectToPage('/');
     }); */   

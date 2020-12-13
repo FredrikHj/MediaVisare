@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { MediaChooserStyle } from '../Style/MediaChooserStyle';
 
 // Import inportant components for the specific page
-import { BackendURL } from'../Data/BackendURL';
 
 //import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 //import { MediaActionBtn } from '../Components - Old/MediaAction';
@@ -18,18 +17,13 @@ import { BackendURL } from'../Data/BackendURL';
 
 //import { updateLogedIn } from '../store';
 import { IconViewer } from'./IconsViewer';
-import { incommingMediaObj$ } from'../Data/PropsStorage';
 
 export let MediaChooser = () => {
   let [ appUrl, setAppUrl ] = useState('/');
-  let [ mediaObj, updateMediaObj ] = useState();
 
   useEffect(() => {
-    incommingMediaObj$.subscribe((media) => {
-      updateMediaObj(media);
-    });
-  },[mediaObj]);
-  console.log("🚀 ~ file: MediaChooser.js ~ line 32 ~ MediaChooser ~ mediaObj", mediaObj)
+
+  },[]);
   
   return (
     <MediaChooserStyle.mainContainer>
@@ -39,10 +33,8 @@ export let MediaChooser = () => {
 
       <MediaChooserStyle.mediaContent>
         <MediaChooserStyle.iconsContainer>
-          Mappar och ikoner {/* <NavFileStructure location={this.props.location} /> */}
-          <IconViewer 
-            mediaObj={ mediaObj }
-          />
+          Mappar och ikoner
+          <IconViewer />
         </MediaChooserStyle.iconsContainer>
         <MediaChooserStyle.viewerContainer>
           {

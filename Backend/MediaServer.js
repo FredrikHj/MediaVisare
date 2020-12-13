@@ -24,7 +24,7 @@ const port = backConfig.serverPort;
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 
 // Media objekt
-let mediaListObj = { folders: [], files: [] };
+let mediaListObj = { };
 
 const filesOrFiles = (incommingType) => {
     // Check if incommingType is a file or not 
@@ -33,10 +33,8 @@ const filesOrFiles = (incommingType) => {
     if(isFile === false) return 'folders';
 }
 const fileType = (incommingType) => {
-    // Check if incommingType is a file or not 
-    let isImage = incommingType.includes('jpg', 'png');
-    console.log("🚀 ~ file: MediaServer.js ~ line 36 ~ fileType ~ incommingType", incommingType)
-    console.log("🚀 ~ file: MediaServer.js ~ line 38 ~ fileType ~ isFile", isImage)
+    // Check if incommingType is a file or not and if that is big or small file end
+    let isImage = incommingType.includes('jpg') || incommingType.includes('JPG');
     if(isImage === true) return 'Images';
     if(isImage === false) return 'HomeMovie';
 }
@@ -63,13 +61,13 @@ let requestMedia = (mediaSubPatch) => {
     });
 }
 let creatMediaObj = (mediaSubPatch, file, correspondingIcon, objKey, mediaPath) => {
+console.log("🚀 ~ file: MediaServer.js ~ line 64 ~ creatMediaObj ~ mediaPath", mediaPath)
     //Get the file information
     let { size} = fileSystem.statSync(`${mediaRootPath + mediaSubPatch}\\${file}`);
     let { birthtime} = fileSystem.statSync(`${mediaRootPath + mediaSubPatch}\\${file}`);
     let { mtime} = fileSystem.statSync(`${mediaRootPath + mediaSubPatch}\\${file}`);
     
     const mediaObj = {
-        mediaType: mediaPath,
         path: `/${mediaPath}/`,
         name: file,
         size: size,
@@ -81,10 +79,12 @@ let creatMediaObj = (mediaSubPatch, file, correspondingIcon, objKey, mediaPath) 
     mediaListObj[objKey].push(mediaObj);
     
 }
-app.get('/ReqMedia', (req, res) => {
+app.get('/ReqMedia:Mediatype', (req, res) => {
     console.log('Requested ImagesObj');
+    const targetMedia = req.params.Mediatype;
+
     // Emtying the mediaObj
-    mediaListObj = { folders: [], files: [] };
+    mediaListObj = { mediaType: targetMedia, folders: [], files: [] };
     
     requestMedia('Images');
     console.log('MediaUpdate');

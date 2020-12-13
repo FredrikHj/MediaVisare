@@ -12,11 +12,12 @@ let listFileCount = 0;
 export let reqMedia = (reqType) => {
     console.log("🚀 ~ file: Axios.js ~ line 13 ~ reqMedia ~ reqType", reqType)
     // Type of post method
-    if (reqType === 'showImages') reqMediaRoute('/ReqMedia');
-    if (reqType === 'showHomeMovies') reqMediaRoute('/ReqHomeMovies');
+    if (reqType === 'showImages') reqMediaRoute('/ReqMedia', 'Images');
+    //if (reqType === 'showHomeMovies') reqMediaRoute('/ReqHomeMovies');
 }
-let reqMediaRoute = (routes) => {
-    axios.get(BackendURL + routes).then(response => {
+let reqMediaRoute = (routes, mediaType) => {
+console.log("🚀 ~ file: Axios.js ~ line 19 ~ reqMediaRoute ~ mediaType", mediaType)
+    axios.get(BackendURL + routes + `${mediaType}`).then(response => {
         if(response.status === 200){
             //Save the incomming mediaObj into the mediaListObj created for the Frontend
             mediaListObj = response.data;
