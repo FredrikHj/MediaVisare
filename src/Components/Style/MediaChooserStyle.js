@@ -16,24 +16,22 @@ export let MediaChooserStyle = {
         background-color: white;
     `,
     mediaContent: styled.section`
-        margin-top: 5%;
-        width: 100%;
-        height: 60vh;
+        margin-top: 1%;
+        width: 90%;
+        height: 75vh;
         display: flex;
         flex-direction: row;
     `,
     iconsContainer: styled.section`
         border: 5px solid orange;
-        border-top-right-radius: 10vh; 
-        border-bottom-right-radius: 10vh; 
+        border-radius: 10vh; 
         width: 60%;
         text-align: center;
         background-color: white;
     `,
     viewerContainer: styled.section`
         border: 5px solid orange;
-        border-top-left-radius: 10vh; 
-        border-bottom-left-radius: 10vh; 
+        border-radius: 10vh; 
         margin-left: 5%;
         width: 35%;
         text-align: center;

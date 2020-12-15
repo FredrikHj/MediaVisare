@@ -6,6 +6,9 @@ import { MappFilesIconStyle } from '../Style/MappFilesIconsStyle';
 
 // Import inportant components for the specific page
 import { incommingMediaObj$ } from'../Data/PropsStorage';
+import { ShowFiles } from'./ShowFiles';
+import { ShowFolders } from'./ShowFolders';
+
 import { BackendURL } from'../Data/BackendURL';
 
 export let IconViewer = () => {
@@ -16,24 +19,19 @@ export let IconViewer = () => {
             updateMediaObjList(mediaObj);
         });
     },[]);
+    
+    const showMediaIcon = () => {
+        setTimeout(() => {
+        }, 1000);
+    }  
     console.log("🚀 ~ file: iconsViewer.js ~ line 20 ~ IconViewer ~ filesArr", mediaObjList)    
     return( 
-        <MappFilesIconStyle.iconContainer>
-            {(mediaObjList !== {})
-                ?
-                    (mediaObjList.mediaType === 'Images')
-                        ? 
-                            mediaObjList.files.map((item, index) => {
-                                const sourcePath = BackendURL + item.path + item.name;
-                                return(
-                                    <>
-                                        <MappFilesIconStyle.mediaIconImg key={ index } src={ sourcePath }></MappFilesIconStyle.mediaIconImg>
-                                    </>
-                                );
-                            })
-                        : ''
-                : 'gerg'
-            }
-        </MappFilesIconStyle.iconContainer>
+        <>
+            <>
+                <ShowFolders />
+                <hr/>
+                <ShowFiles />
+            </> 
+        </>
     );
 }

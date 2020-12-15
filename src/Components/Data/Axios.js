@@ -18,6 +18,7 @@ export let reqMedia = (reqType) => {
 let reqMediaRoute = (routes, mediaType) => {
 console.log("🚀 ~ file: Axios.js ~ line 19 ~ reqMediaRoute ~ mediaType", mediaType)
     axios.get(BackendURL + routes + `${mediaType}`).then(response => {
+        console.log("🚀 ~ file: Axios.js ~ line 21 ~ axios.get ~ response", response)
         if(response.status === 200){
             //Save the incomming mediaObj into the mediaListObj created for the Frontend
             mediaListObj = response.data;
