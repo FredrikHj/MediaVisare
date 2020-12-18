@@ -46,11 +46,14 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
             cDate: birthtime,
             mDate: mtime,
             path: `/${mediaPath}/`,
-            size: size,
+            sizeMb: size,
             descrption: 'Vill du ha en beskrivning? Skapa en txt fil och lägg i samma mapp som aktuell bild',
-            icon: correspondingIcon,
+            icon: {
+                    correspondingsIcon: correspondingIcon,
+                    size: { heigth: 0, width: 0}
+                },                  
             rawData: '',
-        };
+        }
         mediaListObj[objKey].push(mediaObj); 
         return mediaListObj;
     }
@@ -66,4 +69,4 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
         if(isImage === true) return 'Images';
         if(isImage === false) return 'HomeMovie';
     }
-}  
+} 

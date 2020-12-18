@@ -12,26 +12,41 @@ import { ShowFolders } from'./ShowFolders';
 import { BackendURL } from'../Data/BackendURL';
 
 export let IconViewer = () => {
-    let [ mediaObjList, updateMediaObjList ] = useState([]);
-
+    let [ mediaObjList, updateMediaObjList ] = useState(null);
+    let [ folderList, updateFolderList ] = useState('Laddar mappar');
+    let [ fileList, updateFileList ] = useState([]);
+    
     useEffect(() => {
         incommingMediaObj$.subscribe((mediaObj) => {
+            console.log("🚀 ~ file: IconsViewer.js ~ line 21 ~ incommingMediaObj$.subscribe ~ mediaObj", mediaObj)
             updateMediaObjList(mediaObj);
+            updateFolderList(mediaObj.folders);
+
+            // Fix FileList with the items size
+/*             mediaObj.files['itemSize'] = {
+                heigth: 0,
+                witdh: 0
+            }
+ */            updateFileList(mediaObj.files);
         });
-    },[]);
-    
-    const showMediaIcon = () => {
-        setTimeout(() => {
-        }, 1000);
-    }  
-    console.log("🚀 ~ file: iconsViewer.js ~ line 20 ~ IconViewer ~ filesArr", mediaObjList)    
+    },[fileList, folderList, mediaObjList]);
+    console.log("🚀 ~ file: IconsViewer.js ~ line 16 ~ IconViewer ~ mediaObjList", mediaObjList)
     return( 
         <>
-            <>
-                <ShowFolders />
-                <hr/>
-                <ShowFiles />
-            </> 
+            {(mediaObjList === null || mediaObjList === {})
+                ?
+                    'ADFB'
+                :  
+                    <>
+                        <ShowFolders
+                            folderList={ folderList }
+                        />
+                        <hr/>
+                        <ShowFiles
+                            fileList={ fileList }
+                        />
+                    </>
+            }
         </>
     );
 }

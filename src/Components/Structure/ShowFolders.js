@@ -9,14 +9,10 @@ import { incommingMediaObj$ } from'../Data/PropsStorage';
 import { BackendURL } from'../Data/BackendURL';
 import { FcFolder, FcOpenedFolder  } from "react-icons/fc";
 
-export let ShowFolders = () => {
-    let [ folderList, updateFolderList ] = useState([]);
+export let ShowFolders = (props) => {
+    const { folderList } = props;
 
-    useEffect(() => {
-        incommingMediaObj$.subscribe((mediaObj) => {
-            updateFolderList(mediaObj.folders);
-        });
-    },[]); 
+    console.log("🚀 ~ file: ShowFolders.js ~ line 14 ~ ShowFolders ~ folderList", folderList)
     return( 
         <MappFilesIconStyle.mappIconContainer>
          {folderList !== {} && folderList !== undefined &&

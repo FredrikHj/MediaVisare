@@ -89,7 +89,7 @@ const runMediaMode = (e) =>{
       
 
       <FooterStyle.mainContainer>
-        Copyright: Fredrik Hjärperge
+        Copyright: Fredrik Hjärpe
       </FooterStyle.mainContainer>
     </AppBodyStyle.mainContainer>
   );

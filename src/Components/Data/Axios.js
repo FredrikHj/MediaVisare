@@ -16,23 +16,16 @@ export let reqMedia = (reqType) => {
     //if (reqType === 'showHomeMovies') reqMediaRoute('/ReqHomeMovies');
 }
 let reqMediaRoute = (routes, mediaType) => {
-console.log("🚀 ~ file: Axios.js ~ line 19 ~ reqMediaRoute ~ mediaType", mediaType)
     axios.get(BackendURL + routes + `${mediaType}`).then(response => {
-        console.log("🚀 ~ file: Axios.js ~ line 21 ~ axios.get ~ response", response)
         if(response.status === 200){
+            console.log("🚀 ~ file: Axios.js ~ line 21 ~ axios.get ~ response", response)
             //Save the incomming mediaObj into the mediaListObj created for the Frontend
             mediaListObj = response.data;
-            //reqRawData('/ReqRawData', 'Images'); 
+            updateMedia(mediaListObj);
+            console.log("🚀 ~ file: Axios.js ~ line 24 ~ mediaListObj", mediaListObj)
         }
     }).
     catch(error => {});
-    setTimeout(() => {
-        console.log("🚀 ~ file: Axios.js ~ line 10 ~ mediaListObj", mediaListObj)
-        updateMediaObj();
-    }, 1000);
-}
-const updateMediaObj = () =>{
-    updateMedia(mediaListObj);
 }
 /* let reqRawData = (routes, mediaPath) => {  
     // Needed loops getting the rawData of a file and current loop getting the rawData
