@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 
-
 let cors = require('cors');
 const mediaRootPath = 'u:\\testMedia\\';
 app.use(express.static(mediaRootPath));
