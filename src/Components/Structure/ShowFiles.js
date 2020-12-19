@@ -17,11 +17,16 @@ export let ShowFiles = (props) => {
     },[])
     
     let saveImgPxSize = (e) => {
-        let index = imgIndex++;
+        //imgIndex++;
         let targetImg = e.target;
+        console.log("🚀 ~ file: ShowFiles.js ~ line 22 ~ saveImgPxSize ~ targetImg", targetImg)
+        let index = targetImg.id;
+        console.log("🚀 ~ file: ShowFiles.js ~ line 21 ~ saveImgPxSize ~ index", index)
+
         console.log("🚀 ~ file: ShowFiles.js ~ line 12 ~ ShowFiles ~ fileList", fileList)
         
-        //if(imgPxSizeRefArr.length <= index) imgPxSizeRefArr[index].push(React.createRef()); 
+        if(imgPxSizeRefArr.length <= imgIndex) //console.log('ef');   
+        imgPxSizeRefArr[index].push(React.createRef()); 
         
         // Make the icon --> size object in the fileList and its two keys as React.createRef()
         /* fileList[index].icon.size.heigth = React.createRef();
@@ -35,7 +40,7 @@ export let ShowFiles = (props) => {
                     const sourcePath = BackendURL + item.path + item.name;
                     return(
                         <>
-                            <MappFilesIconStyle.mediaIconImg key={ index } src={ sourcePath } onLoad={ saveImgPxSize }></MappFilesIconStyle.mediaIconImg>
+                            <MappFilesIconStyle.mediaIconImg key={index} id={index} src={sourcePath} onLoad={ saveImgPxSize }></MappFilesIconStyle.mediaIconImg>
                         </>
                     );
                 })            
