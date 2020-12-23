@@ -21,13 +21,7 @@ export let IconViewer = () => {
             console.log("🚀 ~ file: IconsViewer.js ~ line 21 ~ incommingMediaObj$.subscribe ~ mediaObj", mediaObj)
             updateMediaObjList(mediaObj);
             updateFolderList(mediaObj.folders);
-
-            // Fix FileList with the items size
-/*             mediaObj.files['itemSize'] = {
-                heigth: 0,
-                witdh: 0
-            }
- */            updateFileList(mediaObj.files);
+            updateFileList(mediaObj.files);
         });
     },[fileList, folderList, mediaObjList]);
     console.log("🚀 ~ file: IconsViewer.js ~ line 16 ~ IconViewer ~ mediaObjList", mediaObjList)
