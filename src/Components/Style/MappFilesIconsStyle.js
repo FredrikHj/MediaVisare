@@ -36,6 +36,11 @@ export let MappFilesIconStyle = {
         margin-top: 20px;
         margin-left: 2%;
     `,
+    mediaIconTool: styled.div`
+        font-family: 'Times New Roman';
+        font-size: 13px;
+        font-weight: bold;
+    `,
     mediaIconName: styled.div`
         font-family: 'Times New Roman';
         font-size: 13px;

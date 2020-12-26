@@ -8,16 +8,26 @@ import { MappFilesIconStyle } from '../Style/MappFilesIconsStyle';
 import { BackendURL } from'../Data/BackendURL';
 
 export let ShowFiles = (props) => {
+    const [ imgIconDimension, setImgIconDimension ] = useState([]);
+
     const { fileList } = props;
     useEffect(() => {
-    },[fileList]);
+    },[fileList, imgIconDimension]);
+    
     let getImgIconDimension = (imgPath, index) => {
         const img = new Image();
         img.src = imgPath;
-        img.onload = function() {
-            console.log(fileList[index].name);
-            console.log(this.width + 'x' + this.height);
+        img.onload = function(){
+            let imgDimensionObj = {
+                height: this.height,
+                width: this.width,
+            }
+            addImgIconDimension(imgDimensionObj, index)
         }
+    }
+    const addImgIconDimension = (imgDimensionObj, index) => {
+        fileList[index].icon.size.height = imgDimensionObj.height;
+        fileList[index].icon.size.width = imgDimensionObj.width;
     }
 
     console.log("🚀 ~ file: ShowFiles.js ~ line 20 ~ ShowFiles ~ fileList", fileList)
@@ -25,10 +35,12 @@ export let ShowFiles = (props) => {
         <MappFilesIconStyle.filesIconContainer>
             {fileList !== {} && fileList !== undefined &&
                 fileList.map((item, index) => {
+                    // The local file link and funtion for the saving of the file dimension for later use
                     const sourcePath = BackendURL + item.path + item.name;
                     getImgIconDimension(sourcePath, index);
                     return(
                         <MappFilesIconStyle.mediaIconContainer key={index}>
+                            <MappFilesIconStyle.mediaIconTool>Verktyg = Förstora m.m.</MappFilesIconStyle.mediaIconTool>
                             <MappFilesIconStyle.mediaIcon key={index*2} id={index} src={sourcePath} style={{height: '75px'}}></MappFilesIconStyle.mediaIcon>
                             <hr></hr>
                             <MappFilesIconStyle.mediaIconName>{item.name}</MappFilesIconStyle.mediaIconName>

@@ -57,8 +57,8 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
             icon: {
                     correspondingsIcon: correspondingIcon,
                     size: { 
-                        heigth: getIconDimension(mediaRootPath, file),
-                        width: 0
+                        height: 0,
+                        width: 0,
                     }
                 },                  
             rawData: '',
@@ -77,12 +77,5 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
         let isImage = incommingType.includes('jpg') || incommingType.includes('JPG');
         if(isImage === true) return 'Images';
         if(isImage === false) return 'HomeMovie';
-    }
-    const getIconDimension = (path, fileName) => {
-        if (fileType(fileName) === 'Images'){   
-            let iconDimensions = sizeOfImg(`U:/testMedia/Images/` + fileName);
-            console.log("🚀 ~ file: Functions.js ~ line 82 ~ getIconDimension ~ iconDimensions", iconDimensions)
-            return iconDimensions.height;
-        }
     }
 }  
