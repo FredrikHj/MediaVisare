@@ -1,4 +1,5 @@
 // Finctions for the Mediavisare backend
+var sizeOfImg = require('image-size');
 
 // Filesystem components
 const fileSystem = require('fs');
@@ -18,7 +19,9 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
         //console.log("🚀 ~ file: MediaServer.js ~ line 38 ~ fileSystem.readdir ~ files", files)
         if (err) return console.log(err);
         
-        files.forEach((file) => {
+        files.forEach((file, index) => {
+            console.log("🚀 ~ file: Functions.js ~ line 23 ~ files.forEach ~ file", file)
+            console.log("🚀 ~ file: Functions.js ~ line 23 ~ files.forEach ~ index", index)
             //Get the size of the incomming media
             
             if(filesOrFolder(file) === 'folders') {
@@ -38,19 +41,25 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
         let { size} = fileSystem.statSync(`${mediaRootPath + targetMedia}\\${file}`);
         let { birthtime} = fileSystem.statSync(`${mediaRootPath + targetMedia}\\${file}`);
         let { mtime} = fileSystem.statSync(`${mediaRootPath + targetMedia}\\${file}`);
+        let filePath = `/${mediaPath}/`;
+
         mediaListObj['mediaType'] = targetMedia;
+
 
         const mediaObj = {
             id: 0,
             name: file,
             cDate: birthtime,
             mDate: mtime,
-            path: `/${mediaPath}/`,
+            path: filePath,
             sizeMb: size,
             descrption: 'Vill du ha en beskrivning? Skapa en txt fil och lägg i samma mapp som aktuell bild',
             icon: {
                     correspondingsIcon: correspondingIcon,
-                    size: { heigth: 0, width: 0}
+                    size: { 
+                        heigth: getIconDimension(mediaRootPath, file),
+                        width: 0
+                    }
                 },                  
             rawData: '',
         }
@@ -69,4 +78,11 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
         if(isImage === true) return 'Images';
         if(isImage === false) return 'HomeMovie';
     }
-} 
+    const getIconDimension = (path, fileName) => {
+        if (fileType(fileName) === 'Images'){   
+            let iconDimensions = sizeOfImg(`U:/testMedia/Images/` + fileName);
+            console.log("🚀 ~ file: Functions.js ~ line 82 ~ getIconDimension ~ iconDimensions", iconDimensions)
+            return iconDimensions.height;
+        }
+    }
+}  

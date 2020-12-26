@@ -6,59 +6,36 @@ import { MappFilesIconStyle } from '../Style/MappFilesIconsStyle';
 
 // Import inportant components for the specific page
 import { BackendURL } from'../Data/BackendURL';
-let imgIndex = -1;
 
 export let ShowFiles = (props) => {
-    const [ imgPxSizeRefArr, setImgPxSizeRefArr ] = useState([]);
-    const { fileList, updateFileList  } = props;
-
+    const { fileList } = props;
     useEffect(() => {
-
-    },[])
-    let saveReactCreateRefInCorrectPlace = (index) => {
-        let pushToImgPxSizeRefArr = [...imgPxSizeRefArr];
-        
-        // Create React.createRef() and save it in the key
-        let saveHeight = fileList[index].icon.size.heigth = React.createRef();
-        let saveWidth = fileList[index].icon.size.heigth = React.createRef();
-        let iconSizeObj = {heigth: saveHeight, width: saveWidth};
-        pushToImgPxSizeRefArr.push(iconSizeObj);       
-        setImgPxSizeRefArr(pushToImgPxSizeRefArr);
-        
-        console.log("🚀 ~ file: ShowFiles.js ~ line 29 ~ saveReactCreateRefInCorrectPlace ~ index", index)
-        console.log("🚀 ~ file: ShowFiles.js ~ line 30 ~ saveReactCreateRefInCorrectPlace ~ fileList.length-1", fileList.length-1)
-        if(index === fileList.length-1) saveValueToKeyInIconSize(index); 
-    }
-    let saveValueToKeyInIconSize = (index) => {
-    console.log("🚀 ~ file: ShowFiles.js ~ line 33 ~ saveValueToKeyInIconSize ~ index", index)
-        let pushToFileList = [...fileList];
-        console.log("🚀 ~ file: ShowFiles.js ~ line 35 ~ saveValueToKeyInIconSize ~ pushToFileList", pushToFileList)
-        // Save icons heith and width into the correct spot
-        
-    }
-    let saveImgPxSize = (e) => {
-        //imgIndex++;
-        let targetImg = e.target;
-        let index = targetImg.id;
-        
-        // Create a shadow copy of the icons size object from the fileList into imgPxSizeRefArr hook and save the React.createRef() in its keys
-        saveReactCreateRefInCorrectPlace(index);
-
-        if(imgPxSizeRefArr.length <= imgIndex) imgPxSizeRefArr[index].push(React.createRef()); 
+    },[fileList]);
+    let getImgIconDimension = (imgPath, index) => {
+        const img = new Image();
+        img.src = imgPath;
+        img.onload = function() {
+            console.log(fileList[index].name);
+            console.log(this.width + 'x' + this.height);
+        }
     }
 
+    console.log("🚀 ~ file: ShowFiles.js ~ line 20 ~ ShowFiles ~ fileList", fileList)
     return( 
-        <MappFilesIconStyle.fileIconContainer>
+        <MappFilesIconStyle.filesIconContainer>
             {fileList !== {} && fileList !== undefined &&
                 fileList.map((item, index) => {
                     const sourcePath = BackendURL + item.path + item.name;
+                    getImgIconDimension(sourcePath, index);
                     return(
-                        <>
-                            <MappFilesIconStyle.mediaIconImg key={index} id={index} src={sourcePath} onLoad={ saveImgPxSize }></MappFilesIconStyle.mediaIconImg>
-                        </>
+                        <MappFilesIconStyle.mediaIconContainer key={index}>
+                            <MappFilesIconStyle.mediaIcon key={index*2} id={index} src={sourcePath} style={{height: '75px'}}></MappFilesIconStyle.mediaIcon>
+                            <hr></hr>
+                            <MappFilesIconStyle.mediaIconName>{item.name}</MappFilesIconStyle.mediaIconName>
+                        </MappFilesIconStyle.mediaIconContainer>
                     );
                 })            
-            } 
-         </MappFilesIconStyle.fileIconContainer>
+            }
+         </MappFilesIconStyle.filesIconContainer>
     );
 }

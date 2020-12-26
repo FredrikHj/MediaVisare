@@ -3,7 +3,7 @@
 Imports module */
 import styled from 'styled-components';
 export let MappFilesIconStyle = {
-    fileIconContainer: styled.section`
+    filesIconContainer: styled.section`
         width: 97%;
         display: flex;
         flex-direction: row;
@@ -28,13 +28,20 @@ export let MappFilesIconStyle = {
         margin-left: 10px;
         text-align: center;
     `,
-    mediaIconImg: styled.img`
+    mediaIconContainer: styled.div`
         border: 1px solid red;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         margin-top: 20px;
         margin-left: 2%;
-        width: 50px;
-        text-align: center;
     `,
+    mediaIconName: styled.div`
+        font-family: 'Times New Roman';
+        font-size: 13px;
+        font-weight: bold;
+    `,
+    mediaIcon: styled.img``,
     mediaIconHomeMovie: styled.section`
         border: 1px solid red;
         width: 75%;

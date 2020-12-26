@@ -27,19 +27,8 @@ app.get('/ReqMedia:Mediatype', (req, res) => {
     
     //mediaListObj = { mediaType: targetMedia, folders: [], files: [] };
     setTimeout(() => {        
-        console.log("🚀 ~ file: MediaServer.js ~ line 33 ~ setTimeout ~ reqMediaObj.mediaListObj()", reqMediaObj.mediaListObj())
+        console.log("🚀 ~ file: MediaServer.js ~ line 33 ~ setTimeout ~ reqMediaObj.mediaListObj()", reqMediaObj.mediaListObj().length)
         // Send the mediaList
         res.status(200).send(reqMediaObj.mediaListObj());
     }, 2000);
 });
-/* app.get('/ReqRawData:Media', (req, res) => {
-    console.log('Requested Image rawData');
-
-    const targetMedia = req.params.Media;
-    const mediaSubPath = targetMedia.split('_')[0];
-
-    const mediaRawDataIndex = targetMedia.split('_')[1];
-    const mediaRawDataIndexNr = parseInt(mediaRawDataIndex);
-
-    res.sendFile(`${mediaRootPath + mediaSubPath}\\${mediaListObj.files[mediaRawDataIndexNr].name}`);
-}); */

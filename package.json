@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "electron": "^11.1.0",
     "express": "^4.17.1",
+    "image-size": "^0.9.3",
     "query-string": "^6.13.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

@@ -13,18 +13,13 @@ import { BackendURL } from'../Data/BackendURL';
 
 export let IconViewer = () => {
     let [ mediaObjList, updateMediaObjList ] = useState(null);
-    let [ folderList, updateFolderList ] = useState('Laddar mappar');
-    let [ fileList, updateFileList ] = useState([]);
     
     useEffect(() => {
         incommingMediaObj$.subscribe((mediaObj) => {
-            console.log("🚀 ~ file: IconsViewer.js ~ line 21 ~ incommingMediaObj$.subscribe ~ mediaObj", mediaObj)
             updateMediaObjList(mediaObj);
-            updateFolderList(mediaObj.folders);
-            updateFileList(mediaObj.files);
         });
-    },[fileList, folderList, mediaObjList]);
-    console.log("🚀 ~ file: IconsViewer.js ~ line 16 ~ IconViewer ~ mediaObjList", mediaObjList)
+    },[mediaObjList]);
+
     return( 
         <>
             {(mediaObjList === null || mediaObjList === {})
@@ -33,11 +28,12 @@ export let IconViewer = () => {
                 :  
                     <>
                         <ShowFolders
-                            folderList={ folderList }
+                            folderList={ mediaObjList.folders }
                         />
+
                         <hr/>
                         <ShowFiles
-                            fileList={ fileList }
+                            fileList={ mediaObjList.files }
                         />
                     </>
             }

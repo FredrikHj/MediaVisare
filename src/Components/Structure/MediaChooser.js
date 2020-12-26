@@ -17,12 +17,14 @@ import { MediaChooserStyle } from '../Style/MediaChooserStyle';
 
 //import { updateLogedIn } from '../store';
 import { IconViewer } from'./IconsViewer';
+let countLoop = 1;
 
 export let MediaChooser = () => {
   let [ appUrl, setAppUrl ] = useState('/');
 
   useEffect(() => {
-
+    console.log("🚀 ~ file: IconsViewer.js ~ line 29 ~ incommingMediaObj$.subscribe ~ countLoop", countLoop)
+    countLoop++;
   },[]);
   
   return (
@@ -39,12 +41,7 @@ export let MediaChooser = () => {
         <MediaChooserStyle.viewerContainer>
           {
             'Mediavisaren med kontroll'
-  /*           <MediaContents 
-              location={this.props.location}
-              showFileList={ this.state.showFileList }
-              getFileItem={ this.getFileItem }
-            /> 
-  */        }
+          }
         </MediaChooserStyle.viewerContainer>
 
       </MediaChooserStyle.mediaContent>

@@ -16,15 +16,14 @@ export let ShowFolders = (props) => {
     return( 
         <MappFilesIconStyle.mappIconContainer>
          {folderList !== {} && folderList !== undefined &&
-                folderList.map((item, index) => {
-                    const mappName = item.name;
-                    console.log("🚀 ~ file: ShowFolders.js ~ line 25 ~ folderList.map ~ mappName", mappName)
-                    return(
-                        <>
-                            <MappFilesIconStyle.mediaIconMapp key={ index }><FcFolder />{ mappName }</MappFilesIconStyle.mediaIconMapp>
-                        </>
-                    );
-                })            
+            folderList.map((item, index) => {
+                const mappName = item.name;
+                return(
+                    <>
+                        <MappFilesIconStyle.mediaIconMapp key={index}><FcFolder />{ mappName }</MappFilesIconStyle.mediaIconMapp>
+                    </>
+                );
+            })            
         }
         </MappFilesIconStyle.mappIconContainer>
     );
