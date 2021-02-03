@@ -35,15 +35,11 @@ export let MediaChooser = () => {
 
       <MediaChooserStyle.mediaContent>
         <MediaChooserStyle.iconsContainer>
-          Mappar och ikoner
-          <IconViewer />
+          <IconViewer/>
         </MediaChooserStyle.iconsContainer>
         <MediaChooserStyle.viewerContainer>
-          {
-            'Mediavisaren med kontroll'
-          }
+          Mediavisaren med kontroll
         </MediaChooserStyle.viewerContainer>
-
       </MediaChooserStyle.mediaContent>
     </MediaChooserStyle.mainContainer>
   );

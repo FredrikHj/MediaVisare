@@ -6,6 +6,7 @@ import {getLocalStorageData} from './LocalStorage';
 const incommingMediaObj = {};
 const headName = '';
 const gotoMediaType = '';
+const mediaRootPath = '';
 
 //===============================================
 
@@ -13,6 +14,7 @@ export const incommingMediaObj$ = new BehaviorSubject(incommingMediaObj);
 export const headName$ = new BehaviorSubject(headName);
 export const gotoMediaType$ = new BehaviorSubject(gotoMediaType);
 export const LocalStorage$ = new BehaviorSubject('');
+export const mediaRootPath$ = new BehaviorSubject(mediaRootPath);
 
 export const updateLocalstorage = (saveLoginData) =>{
     // The localstorage is set with the data
@@ -29,4 +31,7 @@ export function updateMedia(incommingMediaObj){
 export function updateMediaType(gotoMediaType){    
     if(gotoMediaType) gotoMediaType$.next(gotoMediaType);
     return gotoMediaType;
+}
+export function updateMediaRootPath(mediaRootPath){    
+    if(mediaRootPath) mediaRootPath$.next(mediaRootPath);
 }

@@ -1,3 +1,6 @@
+//Config for the backend
+const backConfig = require('./backConfig.json');
+
 // Finctions for the Mediavisare backend
 var sizeOfImg = require('image-size');
 
@@ -42,9 +45,8 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
         let { birthtime} = fileSystem.statSync(`${mediaRootPath + targetMedia}\\${file}`);
         let { mtime} = fileSystem.statSync(`${mediaRootPath + targetMedia}\\${file}`);
         let filePath = `/${mediaPath}/`;
-
+        mediaListObj['mediaRootPath'] = backConfig.mediaPath;
         mediaListObj['mediaType'] = targetMedia;
-
 
         const mediaObj = {
             id: 0,

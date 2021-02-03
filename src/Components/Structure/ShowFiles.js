@@ -39,12 +39,12 @@ export let ShowFiles = (props) => {
                     const sourcePath = BackendURL + item.path + item.name;
                     getImgIconDimension(sourcePath, index);
                     return(
-                        <MappFilesIconStyle.mediaIconContainer key={index}>
+                        <MappFilesIconStyle.mediaFileIconContainer key={index}>
                             <MappFilesIconStyle.mediaIconTool>Verktyg = Förstora m.m.</MappFilesIconStyle.mediaIconTool>
-                            <MappFilesIconStyle.mediaIcon key={index*2} id={index} src={sourcePath} style={{height: '75px'}}></MappFilesIconStyle.mediaIcon>
-                            <hr></hr>
+                                <MappFilesIconStyle.mediaFileIcon key={index*2} id={index} src={sourcePath} style={{height: '75px'}}></MappFilesIconStyle.mediaFileIcon>
+                                <hr></hr>
                             <MappFilesIconStyle.mediaIconName>{item.name}</MappFilesIconStyle.mediaIconName>
-                        </MappFilesIconStyle.mediaIconContainer>
+                        </MappFilesIconStyle.mediaFileIconContainer>
                     );
                 })            
             }

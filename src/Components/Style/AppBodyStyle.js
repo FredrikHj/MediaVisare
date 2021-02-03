@@ -13,6 +13,7 @@ export let AppBodyStyle = {
         flex-direction: column;
         background-color: darkgray;
         margin-top: 0px;
+        font-size: 1pm;
         //margin-left: calc(50% - ${mainContainerWidth/2}px);
     `,
   }

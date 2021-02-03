@@ -3,7 +3,7 @@ Imports module */
 import axios from 'axios';
 
 // Import inportant components for the specific page
-import { updateMedia } from'./PropsStorage';
+import { updateMedia, updateMediaRootPath } from'./PropsStorage';
 import { BackendURL } from'./BackendURL';
 
 let mediaListObj = {};
@@ -21,7 +21,9 @@ let reqMediaRoute = (routes, mediaType) => {
             console.log("🚀 ~ file: Axios.js ~ line 21 ~ axios.get ~ response", response)
             //Save the incomming mediaObj into the mediaListObj created for the Frontend
             mediaListObj = response.data;
+            updateMediaRootPath(mediaListObj.mediaRootPath);
             updateMedia(mediaListObj);
+
             console.log("🚀 ~ file: Axios.js ~ line 24 ~ mediaListObj", mediaListObj)
         }
     }).

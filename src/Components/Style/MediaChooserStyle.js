@@ -24,7 +24,6 @@ export let MediaChooserStyle = {
     `,
     iconsContainer: styled.section`
         border: 5px solid orange;
-        border-radius: 10vh; 
         width: 60%;
         text-align: center;
         background-color: white;

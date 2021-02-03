@@ -9,7 +9,7 @@ export let MappFilesIconStyle = {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 75%;
+        height: 80%;
         flex-wrap: wrap;
         overflow-y: scroll;
     `,
@@ -23,13 +23,16 @@ export let MappFilesIconStyle = {
         overflow-y: auto;
     `,
     mediaIconMapp: styled.div`
-        border: 1px solid red;
         margin-top: 5px;
         margin-left: 10px;
         text-align: center;
     `,
-    mediaIconContainer: styled.div`
-        border: 1px solid red;
+    mediaIconMappName: styled.div`
+        margin-top: -50px;
+        margin-left: -10px;
+        text-align: center;
+    `,
+    mediaFileIconContainer: styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -46,7 +49,7 @@ export let MappFilesIconStyle = {
         font-size: 13px;
         font-weight: bold;
     `,
-    mediaIcon: styled.img``,
+    mediaFileIcon: styled.img``,
     mediaIconHomeMovie: styled.section`
         border: 1px solid red;
         width: 75%;

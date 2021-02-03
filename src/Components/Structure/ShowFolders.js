@@ -20,7 +20,7 @@ export let ShowFolders = (props) => {
                 const mappName = item.name;
                 return(
                     <>
-                        <MappFilesIconStyle.mediaIconMapp key={index}><FcFolder />{ mappName }</MappFilesIconStyle.mediaIconMapp>
+                        <MappFilesIconStyle.mediaIconMapp key={index}><FcFolder style={{width: '75px', height: '75px'}}/><MappFilesIconStyle.mediaIconMappName>{mappName}</MappFilesIconStyle.mediaIconMappName></MappFilesIconStyle.mediaIconMapp>
                     </>
                 );
             })            

@@ -3,14 +3,16 @@ const express = require('express');
 const app = express();
 
 let cors = require('cors');
-const mediaRootPath = 'u:\\testMedia\\';
-app.use(express.static(mediaRootPath));
-
-app.use(cors());
 
 //Config for the backend
 const backConfig = require('./backConfig.json');
 const { setTimeout } = require('timers');
+
+const mediaRootPath = backConfig.mediaPath;
+app.use(express.static(mediaRootPath));
+
+app.use(cors());
+
 
 // The server information
 const port = backConfig.serverPort;
