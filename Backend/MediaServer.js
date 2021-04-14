@@ -3,34 +3,46 @@ const express = require('express');
 const app = express();
 
 let cors = require('cors');
-
-//Config for the backend
-const backConfig = require('./backConfig.json');
-const { setTimeout } = require('timers');
-
-const mediaRootPath = backConfig.mediaPath;
-app.use(express.static(mediaRootPath));
-
 app.use(cors());
 
+// Media modules and files
+const getMediaPath = require('./Functions/GetMediaPath');
+const reqMediaObj = require('./Functions/ReqMediaObj');
+
+//Config for the backend
+const serverConfig = require('./Functions/ServerConfig');
+const { setTimeout } = require('timers');
 
 // The server information
-const port = backConfig.serverPort;
+const port = serverConfig.backendServerPort;
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 
-const reqMediaObj = require('./Functions');
-
-
-app.get('/ReqMedia:Mediatype', (req, res) => {
-    console.log('MediaUpdate');
-    const targetMedia = req.params.Mediatype;
+// Middleware
+let reqMediaPath = (req, res, next) => {
+    // Get the current mediaPath
     
-    reqMediaObj.runGetMedia(mediaRootPath, targetMedia);
+    let targetMediaType = req.params.Mediatype;
+    console.log("🚀 ~ file: MediaServer.js ~ line 25 ~ reqMediaPath ~ targetMediaType", targetMediaType)
+    getMediaPath.runSQLConn(getMediaPath.buildCorrectSQLStatement(targetMediaType));
+        
+    //mediaRootPath
+    next();
+    setTimeout(() => {   
+        app.use(express.static('c:/' /*mediaRootPath */));
+        
+        let choosenMediaPath = getMediaPath.incommingMediaPath()[0];
+        console.log("🚀 ~ file: MediaServer.js ~ line 30 ~ setTimeout ~ mediaPath", choosenMediaPath)
+        reqMediaObj.runGetMedia(choosenMediaPath, targetMediaType);
+        
+        //res.status(200).send(getMediaPath.incommingMediaPath());
+        console.log("🚀 ~ file: MediaServer.js ~ line 31", getMediaPath.incommingMediaPath()[0])    
+    }, 500); 
     
-    //mediaListObj = { mediaType: targetMedia, folders: [], files: [] };
-    setTimeout(() => {        
-        console.log("🚀 ~ file: MediaServer.js ~ line 33 ~ setTimeout ~ reqMediaObj.mediaListObj()", reqMediaObj.mediaListObj().length)
-        // Send the mediaList
+} 
+app.get('/ReqMedia:Mediatype', reqMediaPath, (req, res) => {
+    
+    setTimeout(() => {
         res.status(200).send(reqMediaObj.mediaListObj());
     }, 2000);
 });
+

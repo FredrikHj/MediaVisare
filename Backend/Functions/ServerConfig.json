@@ -1,0 +1,10 @@
+{
+    "backendServerPort": "3001",
+    "SQLServerPort": "3306",
+    "host"     : "hbgipnr.mina-projekt.se",
+    "user"     : "mediaViewer",
+    "password" : "rgdGHTR56",
+    "database": "mediaViewer",
+    "SQLTable": "mediaPath",
+    "multipleStatements": "true"
+}
