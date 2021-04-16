@@ -31,8 +31,8 @@ exports.runSQLConn = (SQLStatement) =>{
         if (err) throw err;        
         SQLConn.query(SQLStatement, function (error, sqlResult) {
             console.log("Connect for the SQL DB :)");
-            console.log("exports.runSQLConn -> sqlResult", sqlResult[0].path)
-            incommingMediaPathArr.push(sqlResult[0].path);//.push(sqlResult);
+            console.log("exports.runSQLConn -> sqlResult", sqlResult[0].rootPath)
+            incommingMediaPathArr.push(sqlResult[0].rootPath);//.push(sqlResult);
              
             if (err) {
                 return;
@@ -51,7 +51,6 @@ console.log("🚀 ~ file: GetMediaPath.js ~ line 49 ~ targetMediaType", targetMe
     let device = 'FredrikHj1';
     
     const currentStatement = `SELECT * FROM ${serverConfig.SQLTable} WHERE location="${location}" and device="${device}" and mediaType="${targetMediaType}"`;
-    //ELECT * FROM ${serverConfig.SQLTable} WHERE location="${location}" AND WHERE device="${device}"`;
 
     return currentStatement;
 }

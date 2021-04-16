@@ -19,32 +19,31 @@ exports.runGetMedia = (choosenMediaPath, targetMediaType) =>  {
     mediaListObj = { mediaType: '', folders: [], files: [] };
 
     fileSystem.readdir(`${choosenMediaPath}\\`, (err, files) =>{
-        //console.log("🚀 ~ file: MediaServer.js ~ line 38 ~ fileSystem.readdir ~ files", files)
+        console.log("🚀 ~ file: MediaServer.js ~ line22 ~ fileSystem.readdir ~ files",  files);
         if (err) return console.log(err);
-        
         files.forEach((file, index) => {
-            console.log("🚀 ~ file: Functions.js ~ line 23 ~ files.forEach ~ file", file)
-            console.log("🚀 ~ file: Functions.js ~ line 23 ~ files.forEach ~ index", index)
             //Get the size of the incomming media
-            
-            if(filesOrFolder(file) === 'folders') {
-                const icon = false;
-                creatMediaObj(choosenMediaPath, file, icon, 'folders');
+              if(filesOrFolder(file) === 'folders') {
+                if (files[index] !== folderNotToBeIncluded()[index]) {
+                    const icon = false;
+                    creatMediaObj(choosenMediaPath, file, icon, 'folders');
+                }
             }            
             if(filesOrFolder(file) === 'files'){
                 const icon = true;
                 //if(fileType(file) === 'jpg' || fileType(file) === 'png' || fileType(file) === 'giff') 
                 creatMediaObj(choosenMediaPath, file, icon, 'files', fileType(file));
+                console.log("🚀 ~ file: ReqMediaObj.js ~ line 60 ~ files.forEach ~ fileType(file)", fileType(file))
+                
             }
-                    
-        });
+            });   
     });
-    let creatMediaObj = (choosenMediaPath, file, correspondingIcon, objKey) => {
+    let creatMediaObj = (choosenMediaPath, file, correspondingIcon, objKey, mediaPath) => {
         //Get the file information
         let { size} = fileSystem.statSync(`${choosenMediaPath}\\${file}`);
         let { birthtime} = fileSystem.statSync(`${choosenMediaPath}\\${file}`);
         let { mtime} = fileSystem.statSync(`${choosenMediaPath}\\${file}`);
-        let filePath = `/${choosenMediaPath}/`;
+        let filePath = `/${mediaPath}/`;
         mediaListObj['choosenMediaPath'] = choosenMediaPath;
         mediaListObj['mediaType'] = targetMediaType;
 
@@ -53,7 +52,8 @@ exports.runGetMedia = (choosenMediaPath, targetMediaType) =>  {
             name: file,
             cDate: birthtime,
             mDate: mtime,
-            path: filePath,
+            path: '/' //filePath
+            ,
             sizeMb: size,
             descrption: 'Vill du ha en beskrivning? Skapa en txt fil och lägg i samma mapp som aktuell bild',
             icon: {
@@ -79,5 +79,10 @@ exports.runGetMedia = (choosenMediaPath, targetMediaType) =>  {
         let isImage = incommingType.includes('jpg') || incommingType.includes('JPG');
         if(isImage === true) return 'Images';
         if(isImage === false) return 'HomeMovie';
+    }
+    const folderNotToBeIncluded = () => {
+        // Check if non included folder passing
+        const folders = ['@Recycle', '_gsdata_'];
+        return folders;
     }
 }  

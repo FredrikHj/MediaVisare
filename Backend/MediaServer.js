@@ -25,14 +25,13 @@ let reqMediaPath = (req, res, next) => {
     console.log("🚀 ~ file: MediaServer.js ~ line 25 ~ reqMediaPath ~ targetMediaType", targetMediaType)
     getMediaPath.runSQLConn(getMediaPath.buildCorrectSQLStatement(targetMediaType));
         
-    //mediaRootPath
+    
     next();
     setTimeout(() => {   
-        app.use(express.static('c:/' /*mediaRootPath */));
-        
-        let choosenMediaPath = getMediaPath.incommingMediaPath()[0];
-        console.log("🚀 ~ file: MediaServer.js ~ line 30 ~ setTimeout ~ mediaPath", choosenMediaPath)
-        reqMediaObj.runGetMedia(choosenMediaPath, targetMediaType);
+        let mediaRootPath = getMediaPath.incommingMediaPath()[0];
+        app.use(express.static(mediaRootPath));
+        console.log("🚀 ~ file: MediaServer.js ~ line 30 ~ setTimeout ~ mediaRootPath", mediaRootPath)
+        reqMediaObj.runGetMedia(mediaRootPath, targetMediaType);
         
         //res.status(200).send(getMediaPath.incommingMediaPath());
         console.log("🚀 ~ file: MediaServer.js ~ line 31", getMediaPath.incommingMediaPath()[0])    
