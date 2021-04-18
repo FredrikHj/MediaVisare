@@ -47,11 +47,11 @@ exports.SQLDataArr = [incommingMediaPathArr];
    SQL Question builder */
 exports.buildCorrectSQLStatement = (targetMediaType) =>{ // Find correct SQLStatement
 console.log("🚀 ~ file: GetMediaPath.js ~ line 49 ~ targetMediaType", targetMediaType)
-    let location = 'FredrikHjRaa';
-    let device = 'FredrikHj1';
+    let location = 'HjärpesHBG'; //'FredrikHjRaa';
+    let device =  'ElisabetHj1'; //'FredrikHj1';
     
     const currentStatement = `SELECT * FROM ${serverConfig.SQLTable} WHERE location="${location}" and device="${device}" and mediaType="${targetMediaType}"`;
-
+ 
     return currentStatement;
 }
 // General functions =========================================================================
