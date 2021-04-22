@@ -6,6 +6,7 @@ var sizeOfImg = require('image-size');
 
 // Filesystem components
 const fileSystem = require('fs');
+const { TouchBarColorPicker } = require('electron');
 
 // Media objekt
 let mediaListObj = {};
@@ -19,12 +20,13 @@ exports.runGetMedia = (choosenMediaPath, targetMediaType) =>  {
     mediaListObj = { mediaType: '', folders: [], files: [] };
 
     fileSystem.readdir(`${choosenMediaPath}\\`, (err, files) =>{
-        console.log("🚀 ~ file: MediaServer.js ~ line22 ~ fileSystem.readdir ~ files",  files);
         if (err) return console.log(err);
         files.forEach((file, index) => {
             //Get the size of the incomming media
-              if(filesOrFolder(file) === 'folders') {
-                if (files[index] !== folderNotToBeIncluded()[index]) {
+              if(filesOrFolder(file) === 'folders' ) {
+                // If the string is equal the stirng in the arr the folder is not included else tf continuea to includw folders
+                if (file === folderNotToBeIncluded()[0] || file === folderNotToBeIncluded()[1]) ;
+                else {
                     const icon = false;
                     creatMediaObj(choosenMediaPath, file, icon, 'folders');
                 }

@@ -46,18 +46,21 @@ exports.SQLDataArr = [incommingMediaPathArr];
 /* =======================================================================================================================
    SQL Question builder */
 exports.buildCorrectSQLStatement = (targetMediaType) =>{ // Find correct SQLStatement
-console.log("🚀 ~ file: GetMediaPath.js ~ line 49 ~ targetMediaType", targetMediaType)
-    let location = 'HjärpesHBG'; //'FredrikHjRaa';
-    let device =  'ElisabetHj1'; //'FredrikHj1';
-    
-    const currentStatement = `SELECT * FROM ${serverConfig.SQLTable} WHERE location="${location}" and device="${device}" and mediaType="${targetMediaType}"`;
- 
+    console.log("🚀 ~ file: GetMediaPath.js ~ line 49 ~ targetMediaType", targetMediaType)
+
+    const currentStatement = `SELECT * FROM ${serverConfig.SQLTable} WHERE device="${checkDeviceName()}" and mediaType="${targetMediaType}"`;
     return currentStatement;
 }
 // General functions =========================================================================
 /* Add currrentTimeStamp for the tables records. The stamp is using identifaying the record to be removed when you
 clicking at the corresponding btns*/ 
-
+let checkDeviceName = () => {
+    // Get device name
+    const operativeSystem = require("os");
+    const hostName = operativeSystem.hostname();
+    console.log("🚀 ~ file: GetMediaPath.js ~ line 52 ~ hostName", hostName)
+    return hostName;
+}
 exports.resetSQLData = () => {
     incommingMediaPathArr = [];
 }
