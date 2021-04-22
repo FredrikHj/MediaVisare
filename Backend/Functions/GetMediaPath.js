@@ -30,16 +30,17 @@ exports.runSQLConn = (SQLStatement) =>{
     SQLConn.connect(function(err) { 
         if (err) throw err;        
         SQLConn.query(SQLStatement, function (error, sqlResult) {
+            console.log("🚀 ~ file: GetMediaPath.js ~ line 33 ~ sqlResult", sqlResult)
             console.log("Connect for the SQL DB :)");
             console.log("exports.runSQLConn -> sqlResult", sqlResult[0].rootPath)
             incommingMediaPathArr.push(sqlResult[0].rootPath);//.push(sqlResult);
              
             if (err) {
-                return;
+                return; 
             }
         }); 
         // Closing the connection
-        SQLConn.end();
+        SQLConn.end(); 
     });
 }
 exports.SQLDataArr = [incommingMediaPathArr];
