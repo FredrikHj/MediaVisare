@@ -4,10 +4,13 @@
   "version": "0.1.0",
   "private": true,
   "main": "./public/electron.js",
+  "description": "MediaVisare",
   "dependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
     "axios": "^0.20.0",
     "concurrently": "^5.3.0",
     "cors": "^2.8.5",
+    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.1",
     "image-size": "^0.9.3",
     "mysql": "^2.18.1",
@@ -20,21 +23,20 @@
     "react-scripts": "3.0.0",
     "rxjs": "^6.6.3",
     "styled-components": "^5.0.1",
-    "wait-on": "^5.2.0"
-  },
-  "devDependencies": {
-    "electron": "^11.1.0",
-    "electron-builder": "^22.10.5"
+    "wait-on": "^5.2.0",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "dev": "concurrently \"npm start\" \"npm run server \" \"wait-on http://localhost:3000 && electron .\"",
-    "start": "react-scripts start",
+    "start": "electron-forge start",
     "server": "npx nodemon Backend/MediaServer.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-start": "electron",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "build": {
     "appId": "mediavisare",
@@ -57,5 +59,40 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron-prebuilt-compile": "^8.2.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "mediavisare"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
