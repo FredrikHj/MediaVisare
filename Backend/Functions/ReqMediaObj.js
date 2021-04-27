@@ -6,7 +6,6 @@ var sizeOfImg = require('image-size');
 
 // Filesystem components
 const fileSystem = require('fs');
-const { TouchBarColorPicker } = require('electron');
 
 // Media objekt
 let mediaListObj = {};
