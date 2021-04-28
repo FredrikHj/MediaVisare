@@ -3,7 +3,7 @@
   "author": "Fredrik Hjärpe",
   "version": "0.1.0",
   "private": true,
-  "main": "/public/nwAppStart.js",
+  "main": "index.js",
   "description": "MediaVisare",
   "dependencies": {
     "axios": "^0.20.0",
@@ -26,8 +26,8 @@
     "dev": "concurrently \"set BROWSER=none&&npm start\" \"npm run server \" \"wait-on http://localhost:3000 &&set NWJS_START_URL=http://localhost:3000&& npm run nwApp", 
     "start": "react-scripts start",
     "server": "npx nodemon Backend/MediaServer.js",
-    "nwApp": "nw /public",
-    "nwBuild": "nwbuild --platforms win64,linux32 --buildDir dist/ ./src/", 
+    "nwApp": "nw /src",
+    "nwBuild": "nwbuild --platforms win32,win64,linux32 --buildDir dist/ src/", 
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -50,16 +50,6 @@
   "devDependencies": {
     "nw": "^0.52.2-sdk",
     "nw-builder": "^3.5.7"
-  },
-  "window": {
-    "title": "node-webkit demo",
-    "frame": true,
-    "width": 800,
-    "height": 500,
-    "min_width": 400,
-    "min_height": 200,
-    "max_width": 800,
-    "max_height": 600
   },
   "webkit": {
     "plugin": true
