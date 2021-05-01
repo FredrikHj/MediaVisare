@@ -25,6 +25,8 @@ import { reqMedia } from './Components/Data/Axios';
 
 import { from } from 'rxjs';
 
+const startUrl = process.env.NWJS_START_URL || './public/index.html';
+console.log("🚀 ~ file: MainApp.js ~ line 29 ~ startUrl", startUrl)
 
 let MainApp = () => {
   let [ appUrl, setAppUrl ] = useState('/');
