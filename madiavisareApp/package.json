@@ -1,0 +1,65 @@
+{
+  "name": "mediavisare",
+  "author": "Fredrik Hjärpe",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./public/nwAppStart.js",
+  "description": "MediaVisare",
+  "chromium-args": "--mixed-context",
+  "node-remote": "http://localhost:3000",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "image-size": "^0.9.3",
+    "mysql": "^2.18.1",
+    "query-string": "^6.13.7",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-helmet": "^5.2.0",
+    "react-icons": "^3.11.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.0.0",
+    "rxjs": "^6.6.3",
+    "styled-components": "^5.0.1",
+    "wait-on": "^5.3.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"set BROWSER=none&&npm start\" \"npm run server \" \"wait-on http://localhost:3000 &&set NWJS_START_URL=http://localhost:3000&& npm run nwApp",
+    "start": "react-scripts start",
+    "server": "npx nodemon Backend/MediaServer.js",
+    "nwApp": "nw /src",
+    "nwBuild": "nwbuild --platforms win32,win64,linux32 --buildDir dist/ src/",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "nwjs-pack": "build --tasks win-x86 --mirror https://dl.nwjs.io/ .",
+    "prenwjs-pack": "npm build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "nw": "^0.52.2-sdk",
+    "nw-builder": "^3.5.7",
+    "nwjs-builder-phoenix": "^1.15.0"
+  },
+  "build": {
+    "nwVersion": "0.39.3"
+  },
+  "webkit": {
+    "plugin": true
+  }
+}

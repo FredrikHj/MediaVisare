@@ -24,9 +24,10 @@ import { mediaRootPath$ } from './Components/Data/PropsStorage';
 import { reqMedia } from './Components/Data/Axios';
 
 import { from } from 'rxjs';
-
-const startUrl = process.env.NWJS_START_URL || './public/index.html';
-console.log("🚀 ~ file: MainApp.js ~ line 29 ~ startUrl", startUrl)
+const startUrl = 
+console.log("🚀 ~ file: MainApp.js ~ line 28 ~ startUrl", startUrl)
+//process.env.NWJS_START_URL || 
+'http://localhost:3000/MediaChooser';
 
 let MainApp = () => {
   let [ appUrl, setAppUrl ] = useState('/');

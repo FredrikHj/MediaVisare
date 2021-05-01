@@ -10,9 +10,8 @@
 
 # production
 /build
-
-# caching
-/cache
+/dist
+/out
 
 # misc
 .DS_Store
