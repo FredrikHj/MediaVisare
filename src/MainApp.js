@@ -95,7 +95,8 @@ let MainApp = () => {
       </HeaderStyle.mainContainer>
 
       <Router>
-        {window.location.pathname === routeName.mainPage && <Redirect to={ 'MediaChooser'} />}
+        {/* {window.location.pathname === routeName.mainPage && ?????} */}
+      <Redirect to={ 'MediaChooser'} />
         <Route path="/MediaChooser" component={ MediaChooser }/>
       </Router>
       
