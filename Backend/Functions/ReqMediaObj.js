@@ -53,7 +53,7 @@ exports.runGetMedia = (choosenMediaPath, targetMediaType) =>  {
             name: file,
             cDate: birthtime,
             mDate: mtime,
-            path: '/' //filePath
+            currentPath: '/' //filePath
             ,
             sizeMb: size,
             descrption: 'Vill du ha en beskrivning? Skapa en txt fil och lägg i samma mapp som aktuell bild',
