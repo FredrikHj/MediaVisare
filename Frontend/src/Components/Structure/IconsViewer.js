@@ -19,7 +19,7 @@ export let IconViewer = () => {
             updateMediaObjList(mediaObj);
         });
     },[mediaObjList]);
-
+    
     return( 
         <>
             {(mediaObjList === null || mediaObjList === {})

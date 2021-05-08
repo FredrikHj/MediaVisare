@@ -6,12 +6,12 @@
   "main": "./Frontend/public/index.html",
   "description": "MediaVisare",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "image-size": "^0.9.3",
-    "mysql": "^2.18.1"
+    "concurrently": "^5.3.0",
   },
   "scripts": {
-    "server": "npx nodemon Backend/MediaServer.js"
+    "dev": "concurrently \"npm start \" \"npm run server",
+    "start": "nw-react-scripts start",
+    "server": "npx nodemon Backend/MediaServer.js",
+    "build": "nw-react-scripts build"
   }
 }

@@ -30,18 +30,17 @@ let reqMediaPath = (req, res, next) => {
     setTimeout(() => {   
         let mediaRootPath = getMediaPath.incommingMediaPath()[0];
         app.use(express.static(mediaRootPath));
-        console.log("🚀 ~ file: MediaServer.js ~ line 30 ~ setTimeout ~ mediaRootPath", mediaRootPath)
-        reqMediaObj.runGetMedia(mediaRootPath, targetMediaType);
+        reqMediaObj.runGetMedia(`${mediaRootPath}2014`, targetMediaType);
         
         //res.status(200).send(getMediaPath.incommingMediaPath());
-        console.log("🚀 ~ file: MediaServer.js ~ line 31", getMediaPath.incommingMediaPath()[0])    
+        console.log("🚀 ~ file: MediaServer.js ~ line 36", getMediaPath.incommingMediaPath()[0])    
     }, 500); 
     
-} 
+}
 app.get('/ReqMedia:Mediatype', reqMediaPath, (req, res) => {
     
     setTimeout(() => {
         res.status(200).send(reqMediaObj.mediaListObj());
     }, 2000);
-});
+}); 
 
