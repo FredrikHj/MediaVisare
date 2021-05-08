@@ -5,7 +5,6 @@ import {Helmet} from "react-helmet";
 // React Router - ES6 modules
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 
-
 // Import style
 import { AppBodyStyle } from './Components/Style/AppBodyStyle';
 import { HeaderStyle, specialStyle } from './Components/Style/HeaderStyle';
@@ -26,6 +25,8 @@ import { reqMedia } from './Components/Data/Axios';
 import { from } from 'rxjs';
 
 let MainApp = () => {
+  const { runfork } = require('runfork');
+  const stop = runfork({ path: '../Backend/MediaServer.js' });
   let [ appUrl, setAppUrl ] = useState('/');
   let [ redirectToPage, updateRedirectToPage ] = useState(window.location.pathname);
   let [ mediaRootPath, updateMedieRootPath ] = useState('');
