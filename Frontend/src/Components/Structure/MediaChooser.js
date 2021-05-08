@@ -10,11 +10,6 @@ import { MediaChooserStyle } from '../Style/MediaChooserStyle';
 
 // Import inportant components for the specific page
 
-//import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
-//import { MediaActionBtn } from '../Components - Old/MediaAction';
-//import { MediaContents } from '../Components - Old/MediaContents';
-//import { NavFileStructure } from '../Components - Old/NavFileStructure';
-
 //import { updateLogedIn } from '../store';
 import { IconViewer } from'./IconsViewer';
 let countLoop = 1;
@@ -26,7 +21,12 @@ export let MediaChooser = () => {
     console.log("🚀 ~ file: IconsViewer.js ~ line 29 ~ incommingMediaObj$.subscribe ~ countLoop", countLoop)
     countLoop++;
   },[]);
-  
+  const choosenFolder = () =>{
+
+  } 
+  const choosenFile = () =>{
+    
+  } 
   return (
     <MediaChooserStyle.mainContainer>
       <MediaChooserStyle.pathesContainer>

@@ -21,24 +21,24 @@ export let MappFilesIconStyle = {
         justify-content: space-around;
         align-items: center;
         flex-wrap: wrap;
+        overflow-x: hidden;
         overflow-y: auto;
     `,
-    mediaIconBtn: styled.button`
-        padding: 0;
-        width: 5%;
+    mediaIconMapp: styled.div`
         margin-top: 5px;
         margin-left: 10px;
     `,
-    mediaIconMapp: styled.div`
-      text-align: center;
-      margin-top: 5px;
-      margin-left: 10px;
+    mediaIconBtn: styled.button`
+        position: relative;
+        top: -70px;
+        left: -2px;
+        width: 55%;
+        height: 6vh;
+        opacity: 0;
     `,
     mediaIconMappName: styled.div`
-        margin-top: -50px;
-        margin-left: -10px;
-        text-align: center;
-
+        margin-top: -110px;
+        margin-left: -2px;
     `,
     mediaFileIconContainer: styled.div`
         flex-direction: column;
