@@ -36,7 +36,7 @@ exports.runGetMedia = (choosenMediaPath, targetMediaType) =>  {
                 creatMediaObj(choosenMediaPath, file, icon, 'files', fileType(file));
                 console.log("🚀 ~ file: ReqMediaObj.js ~ line 60 ~ files.forEach ~ fileType(file)", fileType(file))
                 
-            }
+            } 
             });   
     });
     let creatMediaObj = (choosenMediaPath, file, correspondingIcon, objKey, mediaPath) => {

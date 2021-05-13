@@ -3,10 +3,9 @@
   "author": "Fredrik Hjärpe",
   "version": "0.1.0",
   "private": true,
-  "main": "./Frontend/public/index.html",
   "description": "MediaVisare",
   "dependencies": {
-    "concurrently": "^5.3.0",
+    "concurrently": "^5.3.0"
   },
   "scripts": {
     "dev": "concurrently \"npm start \" \"npm run server",

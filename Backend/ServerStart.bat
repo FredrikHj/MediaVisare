@@ -1,1 +1,1 @@
-nodemon MediaServer.js
+npm run server

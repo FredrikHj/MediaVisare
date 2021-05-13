@@ -12,6 +12,6 @@
     "mysql": "^2.18.1"
   },
   "scripts": {
-    "server": "npx nodemon Backend/MediaServer.js"
+    "server": "npx nodemon MediaServer.js"
   }
 }
