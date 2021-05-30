@@ -8,8 +8,8 @@
     "concurrently": "^5.3.0"
   },
   "scripts": {
-    "dev": "concurrently \"npm start \" \"npm run server",
-    "start": "nw-react-scripts start",
+    "dev": "concurrently \" npm start \" \"npm run server",
+    "start": "MediavisareStart.bat",
     "server": "npx nodemon Backend/MediaServer.js",
     "build": "nw-react-scripts build"
   }

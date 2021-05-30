@@ -1,6 +1,13 @@
 // Creates a Express server in Node JS and use diff... modules    
 const express = require('express');
 const app = express();
+app.use(
+    express.urlencoded({
+      extended: true
+    })
+)
+  
+app.use(express.json());  
 
 let cors = require('cors');
 app.use(cors());
@@ -18,30 +25,27 @@ const port = serverConfig.backendServerPort;
 app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
 
 // Middleware
-let reqMediaPath = (req, res, next) => {
+let reqMediaRootPath = (req, res, next) => {
+
     // Get the current mediaPath
-    
-    let targetMediaType = req.params.Mediatype;
-    console.log("🚀 ~ file: MediaServer.js ~ line 25 ~ reqMediaPath ~ targetMediaType", targetMediaType)
-    getMediaPath.runSQLConn(getMediaPath.buildCorrectSQLStatement(targetMediaType));
-        
-    
+    let reqQuery = req.query;
+    console.log("🚀 ~ file: MediaServer.js ~ line 32 ~ reqMediaRootPath ~ reqQuery", reqQuery)
+    console.log("🚀 ~ file: MediaServer.js ~ line 35 ~ reqMediaRootPath ~ Boolean(reqQuery.rootPath)", reqQuery.rootPath, Boolean(reqQuery.rootPath));
+    let targetMediaType = reqQuery.mediaType;
+/*     if (Boolean('reqQuery.rootPath') === true) {   
+        getMediaPath.runSQLConn(getMediaPath.buildCorrectSQLStatement(targetMediaType));
+         
+        setTimeout(() => {   
+            let mediaRootPath = getMediaPath.incommingMediaPath()[0];
+            app.use(express.static(mediaRootPath));
+            reqMediaObj.runGetMedia(targetMediaType, mediaRootPath, '');      
+        }, 500);
+    } */
     next();
-    setTimeout(() => {   
-        let mediaRootPath = getMediaPath.incommingMediaPath()[0];
-        app.use(express.static(mediaRootPath));
-        console.log("🚀 ~ file: MediaServer.js ~ line 33 ~ setTimeout ~ mediaRootPath", mediaRootPath)
-        reqMediaObj.runGetMedia(mediaRootPath, targetMediaType);
-        
-        //res.status(200).send(getMediaPath.incommingMediaPath());
-        console.log("🚀 ~ file: MediaServer.js ~ line 36", getMediaPath.incommingMediaPath()[0])    
-    }, 500); 
     
 }
-app.get('/ReqMedia:Mediatype', reqMediaPath, (req, res) => {
-    
+app.get('/ReqRootPath', reqMediaRootPath, (req, res) => {
     setTimeout(() => {
         res.status(200).send(reqMediaObj.mediaListObj());
-    }, 2000);
+    }, 1000);
 }); 
-

@@ -4,41 +4,33 @@ Imports module */
 import styled from 'styled-components';
 export let MappFilesIconStyle = {
     filesIconContainer: styled.section`
-        width: 100%;
-        height: 45%;
+        width: 97%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+    `,
+    mappIconContainer: styled.section`
+        width: 97%;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        overflow-y: scroll;
-    `,
-    mappIconContainer: styled.section`
-        width: 100%;
-        height: 50%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        flex-wrap: wrap;
-        overflow-x: hidden;
         overflow-y: auto;
     `,
     mediaIconMapp: styled.div`
         margin-top: 5px;
         margin-left: 10px;
-    `,
-    mediaIconBtn: styled.button`
-        position: relative;
-        top: -70px;
-        left: -2px;
-        width: 55%;
-        height: 6vh;
-        opacity: 0;
+        text-align: center;
     `,
     mediaIconMappName: styled.div`
-        margin-top: -110px;
-        margin-left: -2px;
+        margin-top: -50px;
+        margin-left: -10px;
+        text-align: center;
     `,
     mediaFileIconContainer: styled.div`
         flex-direction: column;

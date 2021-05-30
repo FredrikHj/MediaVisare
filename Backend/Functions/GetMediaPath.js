@@ -17,7 +17,6 @@ exports.incommingMediaPath = () => {
 exports.runSQLConn = (SQLStatement) =>{
 
     
-    console.log("runSQLConn - SQLStatement", SQLStatement)
     // Creates a connection between the server and my client and listen for SQL changes    
     let SQLConn = mysql.createConnection({
         host: serverConfig.host,
@@ -30,11 +29,9 @@ exports.runSQLConn = (SQLStatement) =>{
     SQLConn.connect(function(err) { 
         if (err) throw err;        
         SQLConn.query(SQLStatement, function (error, sqlResult) {
-            console.log("🚀 ~ file: GetMediaPath.js ~ line 33 ~ sqlResult", sqlResult)
             console.log("Connect for the SQL DB :)");
-            console.log("exports.runSQLConn -> sqlResult", sqlResult[0].rootPath)
-            incommingMediaPathArr.push(sqlResult[0].rootPath);//.push(sqlResult);
-             
+            incommingMediaPathArr.push(sqlResult[0].rootPath);
+
             if (err) {
                 return; 
             }
@@ -47,7 +44,6 @@ exports.SQLDataArr = [incommingMediaPathArr];
 /* =======================================================================================================================
    SQL Question builder */
 exports.buildCorrectSQLStatement = (targetMediaType) =>{ // Find correct SQLStatement
-    console.log("🚀 ~ file: GetMediaPath.js ~ line 49 ~ targetMediaType", targetMediaType)
 
     const currentStatement = `SELECT * FROM ${serverConfig.SQLTable} WHERE device="${checkDeviceName()}" and mediaType="${targetMediaType}"`;
     return currentStatement;
@@ -59,7 +55,6 @@ let checkDeviceName = () => {
     // Get device name
     const operativeSystem = require("os");
     const hostName = operativeSystem.hostname();
-    console.log("🚀 ~ file: GetMediaPath.js ~ line 52 ~ hostName", hostName)
     return hostName;
 }
 exports.resetSQLData = () => {
