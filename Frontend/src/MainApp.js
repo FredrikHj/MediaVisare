@@ -29,30 +29,33 @@ import { from } from 'rxjs';
 let MainApp = () => {
   let [ appUrl, setAppUrl ] = useState('/');
   let [ redirectToPage, updateRedirectToPage ] = useState(window.location.pathname);
+  let [ mediaType, updateMediaType ] = useState('Images');
   let [ mediaRootPath, updateMedieRootPath ] = useState('');
   
-  useEffect(() => {
-    reqMedia('showImages');
-    
+  useEffect(() => {   
     mediaRootPath$.subscribe((mediaRootPath) => {
-      updateMedieRootPath(mediaRootPath);
+      console.log("🚀 ~ file: MainApp.js ~ line 38 ~ mediaRootPath$.subscribe ~ mediaRootPath", mediaRootPath)
+      if (mediaRootPath === '') updateMedieRootPath('/');
+      else updateMedieRootPath(mediaRootPath);
     });
+    
+    console.log("🚀 ~ file: MainApp.js ~ line 34 ~ MainApp ~ mediaRootPath", mediaRootPath)
+    reqMedia(mediaType, mediaRootPath);
     console.log("routeName", routeName)
   },[mediaRootPath]);
-  const runHeadBtns = (e) =>{
+  const runHeadBtns = (e) =>{ 
     const targetBtn = e.target;
     const targetMode = targetBtn.id;
-    console.log("🚀 ~ file: MainApp.js ~ line 41 ~ runMediaMode ~ targetMode", targetBtn)
-    console.log("🚀 ~ file: MainApp.js ~ line 44 ~ runHeadBtns ~ targetMode", targetMode)
+    console.log("🚀 ~ file: MainApp.js ~ line 44 ~ runHeadBtns ~ targetMode", targetMode);
     if(targetMode === 'showImages') {
       
       // Run once then every 10 seconds
-      reqMedia('showImages');
+      reqMedia(mediaType, mediaRootPath);
       /*     setInterval(() => {
         reqMedia('showImages');  
       }, 10000);   */
     }
-    if(targetMode === 'showHomeMovies') reqMedia('showHomeMovies');
+    if(targetMode === 'showHomeMovies') reqMedia(mediaType, mediaRootPath);
     if(targetMode === 'settings') reqMedia('showHomeMovies');
   }
   console.log("🚀 ~ file: MainApp.js ~ line 33 ~ MainApp ~ mediaRootPath", mediaRootPath)

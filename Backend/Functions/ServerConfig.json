@@ -1,7 +1,7 @@
 {
     "backendServerPort": "3001",
     "SQLServerPort": "3306",
-    "host"     : "hbgipnr.mina-projekt.se",
+    "host"     :  "hbgipnr.mina-projekt.online",
     "user"     : "mediaViewer",
     "password" : "rgdGHTR56",
     "database": "mediaViewer",

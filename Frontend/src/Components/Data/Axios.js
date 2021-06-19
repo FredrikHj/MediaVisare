@@ -9,16 +9,24 @@ import { BackendURL } from'./BackendURL';
 let mediaListObj = {};
 let listFileCount = 0;
 
-export let reqMedia = (reqType) => {
-    console.log("🚀 ~ file: Axios.js ~ line 13 ~ reqMedia ~ reqType", reqType)
+export let reqMedia = (mediaType, mediaRootPath) => {
+    console.log("🚀 ~ file: Axios.js ~ line 13 ~ reqMedia ~ reqType", mediaType)
+    console.log("🚀 ~ file: Axios.js ~ line 13 ~ reqMedia ~ mediaRootPath", mediaRootPath)
     // Type of post method
-    if (reqType === 'showImages') reqMediaRoute('/ReqMedia', 'Images');
+    if (mediaType === 'Images') reqMediaRoute('/ReqRootPath', mediaType, mediaRootPath);
     //if (reqType === 'showHomeMovies') reqMediaRoute('/ReqHomeMovies');
 }
-let reqMediaRoute = (routes, mediaType) => {
-    axios.get(BackendURL + routes + `${mediaType}`).then(response => {
+let reqMediaRoute = (routes, mediaType, mediaRootPath) => {
+console.log("🚀 ~ file: Axios.js ~ line 20 ~ reqMediaRoute ~ mediaType", mediaType)
+    const mediaOptions = {
+        type: mediaType,
+        path: mediaRootPath
+    };
+    console.log("🚀 ~ file: Axios.js ~ line 22 ~ reqMediaRoute ~ mediaOptions", mediaOptions)
+
+    axios.get(BackendURL + routes, {params: mediaOptions}).then(response => {
         if(response.status === 200){
-            console.log("🚀 ~ file: Axios.js ~ line 21 ~ axios.get ~ response", response)
+            console.log("🚀 ~ file: Axios.js ~ line 29 ~ axios.get ~ response", response)
             //Save the incomming mediaObj into the mediaListObj created for the Frontend
             mediaListObj = response.data;
             updateMediaRootPath(mediaListObj.mediaRootPath);

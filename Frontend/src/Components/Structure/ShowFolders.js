@@ -18,9 +18,17 @@ export let ShowFolders = (props) => {
          {folderList !== {} && folderList !== undefined &&
             folderList.map((item, index) => {
                 const mappName = item.name;
+                console.log("🚀 ~ file: ShowFolders.js ~ line 21 ~ folderList.map ~ mappName", mappName.length > 4)
                 return(
-                    <>
-                        <MappFilesIconStyle.mediaIconMapp key={index}><FcFolder style={{width: '75px', height: '75px'}}/><MappFilesIconStyle.mediaIconMappName>{mappName}</MappFilesIconStyle.mediaIconMappName></MappFilesIconStyle.mediaIconMapp>
+                    <>  
+                        <MappFilesIconStyle.mediaIconMapp key={index}><FcFolder style={{width: '75px', height: '75px'}}/>
+                            <MappFilesIconStyle.mediaIconMappName>
+                                {(mappName.length > 4)
+                                    ? 
+                                        <div style={{width: '100%', overflowX: 'scroll'}}>{mappName}</div>
+                                    :   mappName                                 }                            
+                            </MappFilesIconStyle.mediaIconMappName>
+                        </MappFilesIconStyle.mediaIconMapp>
                     </>
                 );
             })            

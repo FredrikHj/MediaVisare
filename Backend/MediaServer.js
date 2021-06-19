@@ -30,22 +30,23 @@ let reqMediaRootPath = (req, res, next) => {
     // Get the current mediaPath
     let reqQuery = req.query;
     console.log("🚀 ~ file: MediaServer.js ~ line 32 ~ reqMediaRootPath ~ reqQuery", reqQuery)
-    console.log("🚀 ~ file: MediaServer.js ~ line 35 ~ reqMediaRootPath ~ Boolean(reqQuery.rootPath)", reqQuery.rootPath, Boolean(reqQuery.rootPath));
-    let targetMediaType = reqQuery.mediaType;
-/*     if (Boolean('reqQuery.rootPath') === true) {   
+    //console.log("🚀 ~ file: MediaServer.js ~ line 35 ~ reqMediaRootPath ~ Boolean(reqQuery.rootPath)", reqQuery.rootPath, Boolean(reqQuery.rootPath));
+    let targetMediaType = reqQuery.type;
+    let targetMediaPath = reqQuery.path;
+    if (Boolean('reqQuery.rootPath') === true) {   
         getMediaPath.runSQLConn(getMediaPath.buildCorrectSQLStatement(targetMediaType));
          
         setTimeout(() => {   
             let mediaRootPath = getMediaPath.incommingMediaPath()[0];
             app.use(express.static(mediaRootPath));
-            reqMediaObj.runGetMedia(targetMediaType, mediaRootPath, '');      
+            reqMediaObj.runGetMedia(targetMediaType, mediaRootPath, targetMediaPath);      
         }, 500);
-    } */
+    }
     next();
     
 }
 app.get('/ReqRootPath', reqMediaRootPath, (req, res) => {
-    setTimeout(() => {
+    setTimeout(() => { 
         res.status(200).send(reqMediaObj.mediaListObj());
     }, 1000);
 }); 

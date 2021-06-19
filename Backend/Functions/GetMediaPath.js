@@ -13,9 +13,9 @@ exports.incommingMediaPath = () => {
     return incommingMediaPathArr;
 }
 /* =======================================================================================================================
- Headfunction for SQL*/
+Headfunction for SQL*/
 exports.runSQLConn = (SQLStatement) =>{
-
+    
     
     // Creates a connection between the server and my client and listen for SQL changes    
     let SQLConn = mysql.createConnection({
@@ -27,24 +27,25 @@ exports.runSQLConn = (SQLStatement) =>{
         multipleStatements: serverConfig.multipleStatements,
     });
     SQLConn.connect(function(err) { 
+        console.log("Connect to the SQL DB :)");
         if (err) throw err;        
         SQLConn.query(SQLStatement, function (error, sqlResult) {
-            console.log("Connect for the SQL DB :)");
             incommingMediaPathArr.push(sqlResult[0].rootPath);
-
+            
             if (err) {
                 return; 
             }
         }); 
         // Closing the connection
         SQLConn.end(); 
-    });
+    }); 
 }
 exports.SQLDataArr = [incommingMediaPathArr];
 /* =======================================================================================================================
-   SQL Question builder */
+SQL Question builder */
 exports.buildCorrectSQLStatement = (targetMediaType) =>{ // Find correct SQLStatement
-
+    console.log("🚀 ~ file: GetMediaPath.js ~ line 1 ~ targetMediaType", targetMediaType)
+    
     const currentStatement = `SELECT * FROM ${serverConfig.SQLTable} WHERE device="${checkDeviceName()}" and mediaType="${targetMediaType}"`;
     return currentStatement;
 }
@@ -55,6 +56,7 @@ let checkDeviceName = () => {
     // Get device name
     const operativeSystem = require("os");
     const hostName = operativeSystem.hostname();
+    console.log("🚀 ~ file: GetMediaPath.js ~ line 59 ~ checkDeviceName ~ hostName", hostName)
     return hostName;
 }
 exports.resetSQLData = () => {

@@ -16,7 +16,7 @@ exports.mediaListObj = () => {
 exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
     let currentPath = mediaRootPath+mediaSubPath;
 
-    console.log("🚀 ~ file: ReqMediaObj.js ~ line 17 ~ currentPath", currentPath)
+    console.log("🚀 ~ file: ReqMediaObj.js ~ line 19 ~ currentPath", currentPath)
     // Emtying the mediaObj
     mediaListObj = { mediaType: '', folders: [], files: [] };
 
@@ -35,18 +35,18 @@ exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
             if(filesOrFolder(file) === 'files'){
                 const icon = true;
                 //if(fileType(file) === 'jpg' || fileType(file) === 'png' || fileType(file) === 'giff') 
-                creatMediaObj(currentPath, file, icon, 'files', fileType(file));
+                creatMediaObj(currentPath, file, icon, 'files', mediaSubPath);
                 
             } 
             });   
     });
-    let creatMediaObj = (currentPath, file, correspondingIcon, objKey, mediaPath) => {
+    let creatMediaObj = (currentPath, file, correspondingIcon, objKey, mediaSubPath) => {
         //Get the file information
         let { size} = fileSystem.statSync(`${currentPath}\\${file}`);
         let { birthtime} = fileSystem.statSync(`${currentPath}\\${file}`);
         let { mtime} = fileSystem.statSync(`${currentPath}\\${file}`);
-        let filePath = `/${mediaPath}/`;
-        mediaListObj['currentPath'] = currentPath;
+        let filePath = mediaSubPath;
+        //mediaListObj['currentPath'] = currentPath;
         mediaListObj['mediaType'] = targetMediaType;
 
         const mediaObj = {
@@ -54,8 +54,7 @@ exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
             name: file,
             cDate: birthtime,
             mDate: mtime,
-            currentPath: '/' //filePath
-            ,
+            currentPath: filePath,
             sizeMb: size,
             descrption: 'Vill du ha en beskrivning? Skapa en txt fil och lägg i samma mapp som aktuell bild',
             icon: {
@@ -67,6 +66,7 @@ exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
                 },                  
             rawData: '',
         }
+        console.log("🚀 ~ file: ReqMediaObj.js ~ line 69 ~ creatMediaObj ~ mediaObj", mediaObj)
         mediaListObj[objKey].push(mediaObj); 
         return mediaListObj;
     }
