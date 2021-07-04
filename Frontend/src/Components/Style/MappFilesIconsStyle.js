@@ -21,17 +21,15 @@ export let MappFilesIconStyle = {
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        overflow-y: auto;
     `,
     mediaIconMapp: styled.div`
         margin-top: 5px;
-        margin-left: 10px;
-        text-align: center;
+        margin-left: 15px;
     `,
     mediaIconMappName: styled.div`
+        width: 100%;
         margin-top: -50px;
-        margin-left: -10px;
-        text-align: center;
+        margin-left: 0px;
     `,
     mediaFileIconContainer: styled.div`
         flex-direction: column;

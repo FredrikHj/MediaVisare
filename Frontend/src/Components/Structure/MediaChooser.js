@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 // Import of styles rouls
 import { MediaChooserStyle } from '../Style/MediaChooserStyle';
+import { ImageViewer } from'./ImageViewer';
 
 // Import inportant components for the specific page
 
@@ -38,7 +39,7 @@ export let MediaChooser = () => {
           <IconViewer/>
         </MediaChooserStyle.iconsContainer>
         <MediaChooserStyle.viewerContainer>
-          Mediavisaren med kontroll
+          <ImageViewer/>
         </MediaChooserStyle.viewerContainer>
       </MediaChooserStyle.mediaContent>
     </MediaChooserStyle.mainContainer>

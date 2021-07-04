@@ -32,7 +32,7 @@ export let MediaChooserStyle = {
         border: 5px solid orange;
         border-radius: 10vh; 
         margin-left: 5%;
-        width: 35%;
+        width: 100%;
         text-align: center;
         background-color: white;
         

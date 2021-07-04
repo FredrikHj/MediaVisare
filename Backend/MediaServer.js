@@ -47,6 +47,6 @@ let reqMediaRootPath = (req, res, next) => {
 }
 app.get('/ReqRootPath', reqMediaRootPath, (req, res) => {
     setTimeout(() => { 
-        res.status(200).send(reqMediaObj.mediaListObj());
+        res.status(200).send(reqMediaObj.mediaListObj()); 
     }, 1000);
 }); 

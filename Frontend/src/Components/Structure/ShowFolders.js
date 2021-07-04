@@ -24,9 +24,9 @@ export let ShowFolders = (props) => {
                         <MappFilesIconStyle.mediaIconMapp key={index}><FcFolder style={{width: '75px', height: '75px'}}/>
                             <MappFilesIconStyle.mediaIconMappName>
                                 {(mappName.length > 4)
-                                    ? 
-                                        <div style={{width: '100%', overflowX: 'scroll'}}>{mappName}</div>
-                                    :   mappName                                 }                            
+                                    ?   <div>?</div>
+                                    :   mappName
+                                }                            
                             </MappFilesIconStyle.mediaIconMappName>
                         </MappFilesIconStyle.mediaIconMapp>
                     </>
