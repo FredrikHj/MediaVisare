@@ -53,7 +53,7 @@ exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
             id: 0,
             name: file,
             cDate: birthtime,
-            mDate: mtime,
+            mDate:  mtime,
             currentPath: filePath,
             sizeMb: size,
             descrption: 'Vill du ha en beskrivning? Skapa en txt fil och lägg i samma mapp som aktuell bild',
@@ -64,7 +64,7 @@ exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
                         width: 0,
                     }
                 },                  
-            rawData: '',
+            rawData: '', 
         }
         console.log("🚀 ~ file: ReqMediaObj.js ~ line 69 ~ creatMediaObj ~ mediaObj", mediaObj)
         mediaListObj[objKey].push(mediaObj); 

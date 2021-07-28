@@ -5,39 +5,71 @@ import React, { useState, useEffect } from 'react';
 import { MappFilesIconStyle } from '../Style/MappFilesIconsStyle';
 
 // Import style
-import { MediaViewerStyle } from'../Style/MediaViewerStyle';
+import { ImageViewerStyle } from'../Style/MediaViewerStyle';
 
 // Import inportant components for the specific page
+import { BackendURL } from'../Data/BackendURL';
 import { incommingMediaObj$ } from'../Data/PropsStorage';
 
 import { ShowFiles } from'./ShowFiles';
 import { ShowFolders } from'./ShowFolders';
 
-import { BackendURL } from'../Data/BackendURL';
 
 export let ImageViewer = () => {
-    let [ mediaObjList, updateMediaObjList ] = useState(null);
+    let [ mediaFile, updateMediaFile ] = useState(null);
     
+
     useEffect(() => {
         incommingMediaObj$.subscribe((mediaObj) => {
-            updateMediaObjList(mediaObj);
-        });
-    },[mediaObjList]);
-    console.log("🚀 ~ file: ImageViewer.js ~ line 23 ~ ImageViewer ~ mediaObjList", mediaObjList)
-
-    return( 
-        <>
-            {(mediaObjList !== {} && mediaObjList !== undefined)
-                ? 'Välj Bild'
-                :
-                    <MediaViewerStyle.headLine>
-                        {`Bildnamn: ${mediaObjList.files[0].name}`}
-                    </MediaViewerStyle.headLine>
-                            <MappFilesIconStyle.mediaIconTool>Verktyg = Förstora m.m.</MappFilesIconStyle.mediaIconTool>
-                            <MappFilesIconStyle.mediaFileIcon key={index*2} id={index} src={sourcePath} style={{height: '75px'}}></MappFilesIconStyle.mediaFileIcon>
-                            <hr></hr>
-                        <MappFilesIconStyle.mediaIconName>{item.name}</MappFilesIconStyle.mediaIconName>
+        console.log("🚀 ~ file: ImageViewer.js ~ line 24 ~ incommingMediaObj$.subscribe ~ mediaObj", mediaObj)
+        const targetMediaFile = mediaObj.files[0];
+            if (mediaObj) {
+                updateMediaFile(targetMediaFile);
             }
-        </>
+        });
+    },[updateMediaFile]);
+    console.log("🚀 ~ file: ImageViewer.js ~ line 23 ~ ImageViewer ~ mediaObjList", mediaFile);
+ 
+    return( 
+        <> 
+            {(mediaFile !== null)
+                ?  <ImageViewerStyle.Container>
+                        <ImageViewerStyle.ItemContainer>
+                            <ImageViewerStyle.HeadLine>Filnamn:</ImageViewerStyle.HeadLine>
+                            <ImageViewerStyle.SubLine>{mediaFile.name}</ImageViewerStyle.SubLine>
+                        </ImageViewerStyle.ItemContainer>
+                        <section>
+
+                            <ImageViewerStyle.ItemContainer>
+                                <ImageViewerStyle.HeadLine>Storlek:</ImageViewerStyle.HeadLine>
+                                <ImageViewerStyle.SubLine>{mediaFile.sizeMb} MB</ImageViewerStyle.SubLine>
+                            </ImageViewerStyle.ItemContainer>
+
+                            <ImageViewerStyle.ItemTable>
+                                <tr><th colspan="2"><ImageViewerStyle.HeadLine>Datum</ImageViewerStyle.HeadLine></th></tr>
+                                <tr>
+                                    <td><ImageViewerStyle.HeadLine>Skapad:</ImageViewerStyle.HeadLine></td>
+                                    <td><ImageViewerStyle.SubLine>{mediaFile.cDate.split('T')[0]}</ImageViewerStyle.SubLine></td>
+                                </tr>
+                                <tr>
+                                    <td><ImageViewerStyle.HeadLine>Ändrad:</ImageViewerStyle.HeadLine></td>
+                                    <td><ImageViewerStyle.SubLine>{mediaFile.mDate.split('T')[0]}</ImageViewerStyle.SubLine></td>
+                                </tr>
+                            </ImageViewerStyle.ItemTable>
+                        </section>
+                        <section>
+                            <img src={`${BackendURL}/${mediaFile.name}`}></img> 
+
+                        </section>
+
+                    
+                        <div>
+                            <ImageViewerStyle.HeadLine>Beskrivning:</ImageViewerStyle.HeadLine>
+                            {mediaFile.descrption}
+                            </div>
+                    </ImageViewerStyle.Container>
+                :   'Välj Bild!'
+            }
+         </>
     );
 }

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export let MappFilesIconStyle = {
     filesIconContainer: styled.section`
         width: 100%;
-        height: 50%;
+        height: 45%;
         display: flex;
         flex-direction: row;
         justify-content: center;
