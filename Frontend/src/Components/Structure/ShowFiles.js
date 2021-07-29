@@ -30,15 +30,12 @@ export let ShowFiles = (props) => {
         fileList[index].icon.size.width = imgDimensionObj.width;
     }
 
-    console.log("🚀 ~ file: ShowFiles.js ~ line 20 ~ ShowFiles ~ fileList", fileList)
     return( 
         <MappFilesIconStyle.filesIconContainer>
             {fileList !== {} && fileList !== undefined &&
                 fileList.map((item, index) => {
-                    console.log("🚀 ~ file: ShowFiles.js ~ line 38 ~ fileList.map ~ item", item)
                     // The local file link and funtion for the saving of the file dimension for later use
                     const sourcePath = BackendURL + item.currentPath + item.name;
-                    console.log("🚀 ~ file: ShowFiles.js ~ line 40 ~ fileList.map ~ sourcePath", sourcePath)
                     getImgIconDimension(sourcePath, index);
                     return(
                         <MappFilesIconStyle.mediaFileIconContainer key={index}>

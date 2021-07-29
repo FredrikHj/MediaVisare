@@ -29,8 +29,6 @@ let reqMediaRootPath = (req, res, next) => {
 
     // Get the current mediaPath
     let reqQuery = req.query;
-    console.log("🚀 ~ file: MediaServer.js ~ line 32 ~ reqMediaRootPath ~ reqQuery", reqQuery)
-    //console.log("🚀 ~ file: MediaServer.js ~ line 35 ~ reqMediaRootPath ~ Boolean(reqQuery.rootPath)", reqQuery.rootPath, Boolean(reqQuery.rootPath));
     let targetMediaType = reqQuery.type;
     let targetMediaPath = reqQuery.path;
     if (Boolean('reqQuery.rootPath') === true) {   

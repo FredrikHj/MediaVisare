@@ -11,7 +11,6 @@ const fileSystem = require('fs');
 let mediaListObj = {};
 
 exports.mediaListObj = () => {
-    console.log("🚀 ~ file: Functions.js ~ line 32 ~ returnMedia", mediaListObj.files.length);
     return mediaListObj;
 }
 exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
@@ -23,8 +22,6 @@ exports.runGetMedia = (mediaRootPath, targetMedia) =>  {
         if (err) return console.log(err);
         
         files.forEach((file, index) => {
-            console.log("🚀 ~ file: Functions.js ~ line 23 ~ files.forEach ~ file", file)
-            console.log("🚀 ~ file: Functions.js ~ line 23 ~ files.forEach ~ index", index)
             //Get the size of the incomming media
             
             if(filesOrFolder(file) === 'folders') {

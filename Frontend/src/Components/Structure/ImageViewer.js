@@ -21,31 +21,30 @@ export let ImageViewer = () => {
 
     useEffect(() => {
         incommingMediaObj$.subscribe((mediaObj) => {
-        console.log("🚀 ~ file: ImageViewer.js ~ line 24 ~ incommingMediaObj$.subscribe ~ mediaObj", mediaObj)
-        const targetMediaFile = mediaObj.files[0];
-            if (mediaObj) {
+            console.log("🚀 ~ file: ImageViewer.js ~ line 24 ~ incommingMediaObj$.subscribe ~ mediaObj", mediaObj)
+            if (mediaObj !== {}) {
+                const targetMediaFile = mediaObj.files[0];
                 updateMediaFile(targetMediaFile);
             }
         });
     },[updateMediaFile]);
-    console.log("🚀 ~ file: ImageViewer.js ~ line 23 ~ ImageViewer ~ mediaObjList", mediaFile);
  
     return( 
         <> 
             {(mediaFile !== null)
-                ?  <ImageViewerStyle.Container>
-                        <ImageViewerStyle.ItemContainer>
+                ?  <ImageViewerStyle.MediaContainer>
+                        <ImageViewerStyle.NameContainer>
                             <ImageViewerStyle.HeadLine>Filnamn:</ImageViewerStyle.HeadLine>
                             <ImageViewerStyle.SubLine>{mediaFile.name}</ImageViewerStyle.SubLine>
-                        </ImageViewerStyle.ItemContainer>
-                        <section>
+                        </ImageViewerStyle.NameContainer>
 
-                            <ImageViewerStyle.ItemContainer>
+                        <ImageViewerStyle.SizeDateContainer>
+                            <ImageViewerStyle.SizeContainer>
                                 <ImageViewerStyle.HeadLine>Storlek:</ImageViewerStyle.HeadLine>
                                 <ImageViewerStyle.SubLine>{mediaFile.sizeMb} MB</ImageViewerStyle.SubLine>
-                            </ImageViewerStyle.ItemContainer>
+                            </ImageViewerStyle.SizeContainer>
 
-                            <ImageViewerStyle.ItemTable>
+                            <ImageViewerStyle.DateTable>
                                 <tr><th colspan="2"><ImageViewerStyle.HeadLine>Datum</ImageViewerStyle.HeadLine></th></tr>
                                 <tr>
                                     <td><ImageViewerStyle.HeadLine>Skapad:</ImageViewerStyle.HeadLine></td>
@@ -55,19 +54,16 @@ export let ImageViewer = () => {
                                     <td><ImageViewerStyle.HeadLine>Ändrad:</ImageViewerStyle.HeadLine></td>
                                     <td><ImageViewerStyle.SubLine>{mediaFile.mDate.split('T')[0]}</ImageViewerStyle.SubLine></td>
                                 </tr>
-                            </ImageViewerStyle.ItemTable>
-                        </section>
-                        <section>
-                            <img src={`${BackendURL}/${mediaFile.name}`}></img> 
+                            </ImageViewerStyle.DateTable>
+                        </ImageViewerStyle.SizeDateContainer>
 
-                        </section>
+                            <ImageViewerStyle.MediaShower src={`${BackendURL}/${mediaFile.name}`}></ImageViewerStyle.MediaShower> 
 
-                    
-                        <div>
+                        <ImageViewerStyle.DescriptionContainer>
                             <ImageViewerStyle.HeadLine>Beskrivning:</ImageViewerStyle.HeadLine>
-                            {mediaFile.descrption}
-                            </div>
-                    </ImageViewerStyle.Container>
+                            <ImageViewerStyle.DescriptionPharagraph>{mediaFile.descrption}</ImageViewerStyle.DescriptionPharagraph>
+                        </ImageViewerStyle.DescriptionContainer>
+                    </ImageViewerStyle.MediaContainer>
                 :   'Välj Bild!'
             }
          </>

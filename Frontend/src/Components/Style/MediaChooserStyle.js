@@ -27,6 +27,7 @@ export let MediaChooserStyle = {
         width: 60%;
         text-align: center;
         background-color: white;
+        border-radius: 10vh;
     `,
     viewerContainer: styled.section`
         border: 5px solid orange;

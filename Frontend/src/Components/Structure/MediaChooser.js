@@ -24,7 +24,6 @@ export let MediaChooser = () => {
   let [ appUrl, setAppUrl ] = useState('/');
 
   useEffect(() => {
-    console.log("🚀 ~ file: IconsViewer.js ~ line 29 ~ incommingMediaObj$.subscribe ~ countLoop", countLoop)
     countLoop++;
   },[]);
   

@@ -2,7 +2,6 @@
 const backConfig = require('./ServerConfig.json');
 
 // Finctions for the Mediavisare backend
-var sizeOfImg = require('image-size');
 
 // Filesystem components
 const fileSystem = require('fs');
@@ -16,7 +15,6 @@ exports.mediaListObj = () => {
 exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
     let currentPath = mediaRootPath+mediaSubPath;
 
-    console.log("🚀 ~ file: ReqMediaObj.js ~ line 19 ~ currentPath", currentPath)
     // Emtying the mediaObj
     mediaListObj = { mediaType: '', folders: [], files: [] };
 
@@ -55,7 +53,7 @@ exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
             cDate: birthtime,
             mDate:  mtime,
             currentPath: filePath,
-            sizeMb: size,
+            sizeMb: SizeBytesIntoMb(size),
             descrption: 'Vill du ha en beskrivning? Skapa en txt fil och lägg i samma mapp som aktuell bild',
             icon: {
                     correspondingsIcon: correspondingIcon,
@@ -63,12 +61,16 @@ exports.runGetMedia = (targetMediaType, mediaRootPath, mediaSubPath) => {
                         height: 0,
                         width: 0,
                     }
-                },                  
+                },
             rawData: '', 
         }
-        console.log("🚀 ~ file: ReqMediaObj.js ~ line 69 ~ creatMediaObj ~ mediaObj", mediaObj)
         mediaListObj[objKey].push(mediaObj); 
         return mediaListObj;
+    }
+    const SizeBytesIntoMb = (size) => {
+        const byteToMb = 1024*1024;
+        const sizeInMb = size/byteToMb;
+        return sizeInMb.toFixed(3);
     }
     const filesOrFolder = (incommingType) => {
         // Check if incommingType is a file or not 
