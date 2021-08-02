@@ -2,7 +2,7 @@
 /* ================================================== Style Rouls for Header ==================================================
 Imports module */
 import styled from 'styled-components';
-const mainContainerWidth = 2000;
+const mainContainerWidth = 1150;
 
 export let AppBodyStyle = {
     mainContainer: styled.section`

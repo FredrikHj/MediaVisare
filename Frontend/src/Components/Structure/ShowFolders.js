@@ -19,13 +19,11 @@ export let ShowFolders = (props) => {
                 const mappName = item.name;
                 return(
                     <>  
-                        <MappFilesIconStyle.mediaIconMapp key={index}><FcFolder style={{width: '75px', height: '75px'}}/>
-                            <MappFilesIconStyle.mediaIconMappName>
+                        <MappFilesIconStyle.mediaIconMapp style={(mappName.length > 4) ? {marginTop: '25px', marginLeft: '-45px'} : null} key={index}><FcFolder style={{width: '75px', height: '75px'}}/>
                                 {(mappName.length > 4)
-                                    ?   <div>?</div>
-                                    :   mappName
+                                    ?   <MappFilesIconStyle.mediaIconMappNameBigger4>{mappName}</MappFilesIconStyle.mediaIconMappNameBigger4>
+                                    :   <MappFilesIconStyle.mediaIconMappName>{mappName}</MappFilesIconStyle.mediaIconMappName>
                                 }                            
-                            </MappFilesIconStyle.mediaIconMappName>
                         </MappFilesIconStyle.mediaIconMapp>
                     </>
                 );

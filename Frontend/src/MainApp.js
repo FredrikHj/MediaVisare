@@ -94,7 +94,7 @@ let MainApp = () => {
                 : `RootPath: ${mediaRootPath}`
               }
           </section>
-          {/* <RiSettings5Fill style={specialStyle.settingSymbol}/> */}
+
         </HeaderStyle.appSetting>
       </HeaderStyle.mainContainer>
 

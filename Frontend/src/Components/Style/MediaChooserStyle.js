@@ -2,6 +2,7 @@
 /* ================================================== Style Rouls for Header ==================================================
 Imports module */
 import styled from 'styled-components';
+const mainContainerWHeight = 95;
 
 export let MediaChooserStyle = {
     mainContainer: styled.section`
@@ -9,11 +10,14 @@ export let MediaChooserStyle = {
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 95vh;
-        `,
+        height: ${mainContainerWHeight}vh;
+    `,
     pathesContainer: styled.section`
         width: 100%;
         background-color: white;
+    `,
+    SpinnerPoss: styled.section`
+        margin-top: calc(50% - 20%);
     `,
     mediaContent: styled.section`
         margin-top: 1%;
@@ -21,6 +25,7 @@ export let MediaChooserStyle = {
         height: 75vh;
         display: flex;
         flex-direction: row;
+        align-content: center;
     `,
     iconsContainer: styled.section`
         border: 5px solid orange;
@@ -36,6 +41,5 @@ export let MediaChooserStyle = {
         width: 100%;
         text-align: center;
         background-color: white;
-        
     `,
   }

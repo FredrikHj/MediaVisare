@@ -18,21 +18,23 @@ import { ShowFolders } from'./ShowFolders';
 export let ImageViewer = () => {
     let [ mediaFile, updateMediaFile ] = useState(null);
     
-
+    
     useEffect(() => {
+        console.log('ImageViewer - Inne');
+        console.log("🚀 ~ file: ImageViewer.js ~ line 32 ~ ImageViewer ~ mediaFile", mediaFile);
+        
         incommingMediaObj$.subscribe((mediaObj) => {
-            console.log("🚀 ~ file: ImageViewer.js ~ line 24 ~ incommingMediaObj$.subscribe ~ mediaObj", mediaObj)
-            if (mediaObj !== {}) {
+            if (mediaObj) {
                 const targetMediaFile = mediaObj.files[0];
                 updateMediaFile(targetMediaFile);
             }
         });
-    },[updateMediaFile]);
+    },[mediaFile]);
  
     return( 
         <> 
             {(mediaFile !== null)
-                ?  <ImageViewerStyle.MediaContainer>
+                ? <ImageViewerStyle.MediaContainer>
                         <ImageViewerStyle.NameContainer>
                             <ImageViewerStyle.HeadLine>Filnamn:</ImageViewerStyle.HeadLine>
                             <ImageViewerStyle.SubLine>{mediaFile.name}</ImageViewerStyle.SubLine>
@@ -57,11 +59,14 @@ export let ImageViewer = () => {
                             </ImageViewerStyle.DateTable>
                         </ImageViewerStyle.SizeDateContainer>
 
-                            <ImageViewerStyle.MediaShower src={`${BackendURL}/${mediaFile.name}`}></ImageViewerStyle.MediaShower> 
-
                         <ImageViewerStyle.DescriptionContainer>
+                            <hr/>
+                            <br></br><br></br>
+
+                           <ImageViewerStyle.MediaShower src={`${BackendURL}/${mediaFile.name}`}></ImageViewerStyle.MediaShower> 
+                            <br></br><br></br>
                             <ImageViewerStyle.HeadLine>Beskrivning:</ImageViewerStyle.HeadLine>
-                            <ImageViewerStyle.DescriptionPharagraph>{mediaFile.descrption}</ImageViewerStyle.DescriptionPharagraph>
+                            <ImageViewerStyle.DescriptionPharagraph>{mediaFile.description}</ImageViewerStyle.DescriptionPharagraph>
                         </ImageViewerStyle.DescriptionContainer>
                     </ImageViewerStyle.MediaContainer>
                 :   'Välj Bild!'

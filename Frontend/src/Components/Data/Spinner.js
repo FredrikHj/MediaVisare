@@ -8,9 +8,9 @@ import '../Style/Spinner.scss';
 // Import inportant components for the specific page
 export let Spinner = (props) => {
     return(
-        <>
-            { props.str } <span className="spinner spinner-dark"></span>
-        </>
+        <section>
+            <p className='textPoss'>{props.str}</p> <span className="spinner spinner-dark"></span>
+        </section>
     );
 }
 export default Spinner;

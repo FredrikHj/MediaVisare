@@ -12,8 +12,8 @@ app.use(express.json());
 let cors = require('cors');
 app.use(cors());
 
-// Media modules and files
-const getMediaPath = require('./Functions/GetMediaPath');
+// Functions for the Mediavisare backend
+const getSQLData = require('./Functions/ReqSQLData');
 const reqMediaObj = require('./Functions/ReqMediaObj');
 
 //Config for the backend
@@ -22,7 +22,7 @@ const { setTimeout } = require('timers');
 
 // The server information
 const port = serverConfig.backendServerPort;
-app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`));
+app.listen(port, () => console.log(`MediaVisare is listening on port ${port}!`)); 
 
 // Middleware
 let reqMediaRootPath = (req, res, next) => {
@@ -30,14 +30,16 @@ let reqMediaRootPath = (req, res, next) => {
     // Get the current mediaPath
     let reqQuery = req.query;
     let targetMediaType = reqQuery.type;
-    let targetMediaPath = reqQuery.path;
+    let targetSQLData = reqQuery.path;
     if (Boolean('reqQuery.rootPath') === true) {   
-        getMediaPath.runSQLConn(getMediaPath.buildCorrectSQLStatement(targetMediaType));
-         
-        setTimeout(() => {   
-            let mediaRootPath = getMediaPath.incommingMediaPath()[0];
+        getSQLData.runSQLConn(getSQLData.buildCorrectSQLStatement(targetMediaType), targetMediaType);
+        getSQLData.runSQLConn(getSQLData.buildCorrectSQLStatement('description'), 'description');
+
+        setTimeout(() => {
+               
+            let mediaRootPath = getSQLData.incommingMediaPath()[0];
             app.use(express.static(mediaRootPath));
-            reqMediaObj.runGetMedia(targetMediaType, mediaRootPath, targetMediaPath);      
+            reqMediaObj.runGetMedia(targetMediaType, mediaRootPath, targetSQLData); 
         }, 500);
     }
     next();
@@ -47,4 +49,4 @@ app.get('/ReqRootPath', reqMediaRootPath, (req, res) => {
     setTimeout(() => { 
         res.status(200).send(reqMediaObj.mediaListObj()); 
     }, 1000);
-}); 
+});  

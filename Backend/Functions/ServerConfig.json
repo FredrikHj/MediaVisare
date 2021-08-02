@@ -5,6 +5,8 @@
     "user"     : "mediaViewer",
     "password" : "rgdGHTR56",
     "database": "mediaViewer",
-    "SQLTable": "mediaPath",
-    "multipleStatements": "true"
+    "SQLTables": {
+        "pathes": "mediaPath",
+        "description": "descriptionImages"
+    }
 }

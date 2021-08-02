@@ -1,22 +1,25 @@
 // ==================================== SQLfunctions handling ====================================
 
 //SQL Module
-var mysql = require('mysql');
+const mysql = require('mysql');
+
 // Import the SQL Config
 const serverConfig = require('./ServerConfig.json');
 
 // Some useful variables used in the functions bellow 
 let incommingMediaPathArr = [];
+let incommingMediaDescriptionArr = [];
 
-// Exported function running when called from both the: Default and User specific method
+// Exported functions running when called from runSQLConn 
 exports.incommingMediaPath = () => {
     return incommingMediaPathArr;
 }
+exports.incommingMediaDescription = () => {
+    return incommingMediaDescriptionArr;
+}
 /* =======================================================================================================================
 Headfunction for SQL*/
-exports.runSQLConn = (SQLStatement) =>{
-    
-    
+exports.runSQLConn = (SQLStatement, mediaType) =>{
     // Creates a connection between the server and my client and listen for SQL changes    
     let SQLConn = mysql.createConnection({
         host: serverConfig.host,
@@ -24,14 +27,13 @@ exports.runSQLConn = (SQLStatement) =>{
         password: serverConfig.password,
         port: serverConfig.sqlPort,
         database: serverConfig.database,
-        multipleStatements: serverConfig.multipleStatements,
     });
     SQLConn.connect(function(err) { 
-        console.log("Connect to the SQL DB :)");
+        console.log("Connect to the SQL DB. Then collecting the mediaPath and file description :)");
         if (err) throw err;        
         SQLConn.query(SQLStatement, function (error, sqlResult) {
-            incommingMediaPathArr.push(sqlResult[0].rootPath);
-            
+            if (mediaType === 'Images') incommingMediaPathArr.push(sqlResult[0].rootPath);
+            if (mediaType === 'description') incommingMediaDescriptionArr.push(sqlResult);
             if (err) {
                 return; 
             }
@@ -44,10 +46,11 @@ exports.SQLDataArr = [incommingMediaPathArr];
 /* =======================================================================================================================
 SQL Question builder */
 exports.buildCorrectSQLStatement = (targetMediaType) =>{ // Find correct SQLStatement
-    console.log("🚀 ~ file: GetMediaPath.js ~ line 1 ~ targetMediaType", targetMediaType)
+    let currentStatement = '';
+    if (targetMediaType === 'Images') currentStatement = `SELECT * FROM ${serverConfig.SQLTables.pathes} WHERE device="${checkDeviceName()}" and mediaType="${targetMediaType}"`;
+    if (targetMediaType === 'description') currentStatement = `SELECT * FROM ${serverConfig.SQLTables.description} WHERE path="/"`;
     
-    const currentStatement = `SELECT * FROM ${serverConfig.SQLTable} WHERE device="${checkDeviceName()}" and mediaType="${targetMediaType}"`;
-    return currentStatement;
+    return currentStatement; 
 }
 // General functions =========================================================================
 /* Add currrentTimeStamp for the tables records. The stamp is using identifaying the record to be removed when you

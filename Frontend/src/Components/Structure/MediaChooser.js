@@ -9,22 +9,22 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { MediaChooserStyle } from '../Style/MediaChooserStyle';
 import { ImageViewer } from'./ImageViewer';
 
-// Import inportant components for the specific page
+// Import inportant components
+import { incommingMediaObj$ } from'../Data/PropsStorage';
+import { Spinner } from '../Data/Spinner';
 
-//import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
-//import { MediaActionBtn } from '../Components - Old/MediaAction';
-//import { MediaContents } from '../Components - Old/MediaContents';
-//import { NavFileStructure } from '../Components - Old/NavFileStructure';
-
-//import { updateLogedIn } from '../store';
 import { IconViewer } from'./IconsViewer';
-let countLoop = 1;
+import { RiWomenFill } from 'react-icons/ri';
 
 export let MediaChooser = () => {
+  console.log('MediaChooser - Inne');
   let [ appUrl, setAppUrl ] = useState('/');
+  let [ mediaList, updateMediaList ] = useState({});
 
   useEffect(() => {
-    countLoop++;
+    incommingMediaObj$.subscribe((mediaObj) => {
+      if (mediaObj) updateMediaList(mediaObj)
+  });
   },[]);
   
   return (
@@ -32,15 +32,20 @@ export let MediaChooser = () => {
       <MediaChooserStyle.pathesContainer>
         Nuvarande mapp och fil struktur = Hoppa emellan
       </MediaChooserStyle.pathesContainer>
-
-      <MediaChooserStyle.mediaContent>
-        <MediaChooserStyle.iconsContainer>
-          <IconViewer/>
-        </MediaChooserStyle.iconsContainer>
-        <MediaChooserStyle.viewerContainer>
-          <ImageViewer/>
-        </MediaChooserStyle.viewerContainer>
-      </MediaChooserStyle.mediaContent>
+        {// Checking if the object has the key mediaType
+          (!mediaList.hasOwnProperty('mediaType') && mediaList !== {})
+            ? <MediaChooserStyle.SpinnerPoss>
+                <Spinner str='Data Laddas ...'/>
+              </MediaChooserStyle.SpinnerPoss>
+            : <MediaChooserStyle.mediaContent>
+                <MediaChooserStyle.iconsContainer>
+                    <IconViewer/>
+                </MediaChooserStyle.iconsContainer>
+                <MediaChooserStyle.viewerContainer>
+                    <ImageViewer/>
+                </MediaChooserStyle.viewerContainer>
+              </MediaChooserStyle.mediaContent>
+        }
     </MediaChooserStyle.mainContainer>
   );
 }
