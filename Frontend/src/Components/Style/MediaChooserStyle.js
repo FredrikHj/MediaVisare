@@ -32,14 +32,16 @@ export let MediaChooserStyle = {
         width: 60%;
         text-align: center;
         background-color: white;
-        border-radius: 10vh;
+        border-top-left-radius: 10vh;
+        border-bottom-left-radius: 10vh;
     `,
     viewerContainer: styled.section`
         border: 5px solid orange;
-        border-radius: 10vh; 
         margin-left: 5%;
         width: 100%;
         text-align: center;
         background-color: white;
+        border-top-right-radius: 10vh;
+        border-bottom-right-radius: 10vh;
     `,
   }

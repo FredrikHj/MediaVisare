@@ -21,6 +21,7 @@ export let MappFilesIconStyle = {
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        overflow-y: scroll;
     `,
     mediaIconMapp: styled.div`
         margin-top: 5px;
