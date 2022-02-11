@@ -21,7 +21,7 @@
     "rxjs": "^6.6.3",
     "styled-components": "^5.0.1",
     "web-vitals": "^0.2.4",
-    "node-sass": "^4.14.1"
+    "node-sass": "^7.0.0"
   },
   "scripts": {
     "start": "nw-react-scripts start",
